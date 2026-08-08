@@ -5,20 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JRS Store - Tools, Apps & Articles Platform</title>
     
-    <!-- SEO Meta Tags -->
     <meta name="description" content="JRS Store is the ultimate platform to download modded apps, tools, read useful articles, and find helpful website links curated by Md Jakariya Hasan.">
     <meta name="keywords" content="JRS Store, Mod Apps, Photo Editor, Game, Root Modules, Video Editor, Md Jakariya Hasan, APK Download">
     <meta name="author" content="Md Jakariya Hasan">
     <meta name="robots" content="index, follow">
     
-    <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="JRS Store">
-    <meta property="og:description" content="Download exclusive applications, read articles, and access useful web tools safely from JRS Store.">
-    <meta property="og:image" content="https://github.com/jakariya41jr/Photos-Row-Link/raw/refs/heads/main/file_00000000798482079f843eb6f797f91d.png">
-    <meta property="og:url" content="https://jakariya41jr.xyz/">
-    <meta property="og:type" content="website">
-
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -46,7 +37,6 @@
             padding-bottom: 100px;
         }
 
-        /* নোটিশ বোর্ড সেকশন */
         .notice-ticker {
             background: linear-gradient(135deg, #f39c12, #e67e22);
             color: #0b0b14;
@@ -59,11 +49,6 @@
             box-shadow: inset 0 -2px 5px rgba(0,0,0,0.2);
         }
 
-        .notice-ticker i {
-            font-size: 16px;
-        }
-
-        /* হেডার ডিজাইন */
         header {
             background: var(--header-bg);
             padding: 12px 18px;
@@ -91,13 +76,11 @@
             border-radius: 50%;
             border: 2px solid #00f2fe;
             object-fit: cover;
-            box-shadow: 0 0 10px rgba(0,242,254,0.4);
         }
 
         .logo-area span {
             font-size: 22px;
             font-weight: 800;
-            letter-spacing: 0.5px;
             background: var(--accent-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -121,7 +104,6 @@
             align-items: center;
             cursor: pointer;
             font-size: 16px;
-            transition: all 0.3s ease;
         }
 
         .container {
@@ -130,7 +112,14 @@
             padding: 0 15px;
         }
 
-        /* ক্যাটাগরি ফিল্টার বার */
+        /* পেজ সেকশন টেস্টিং */
+        .page-section {
+            display: none;
+        }
+        .page-section.active-section {
+            display: block;
+        }
+
         .category-filter-bar {
             display: flex;
             gap: 10px;
@@ -173,7 +162,6 @@
             font-weight: 700;
         }
 
-        /* অ্যাপ গ্রিড লেআউট */
         .app-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -185,7 +173,6 @@
             border-radius: 16px;
             padding: 12px;
             text-align: center;
-            text-decoration: none;
             color: #fff;
             box-shadow: 0 6px 15px rgba(0,0,0,0.3);
             border: 1px solid var(--border-color);
@@ -221,19 +208,7 @@
             color: #f1c40f;
         }
 
-        .download-badge {
-            background: rgba(46, 204, 113, 0.15);
-            color: #2ecc71;
-            font-size: 10px;
-            font-weight: 700;
-            padding: 4px 8px;
-            border-radius: 6px;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .mod-badge {
+        .download-badge, .mod-badge {
             background: rgba(0, 242, 254, 0.15);
             color: #00f2fe;
             font-size: 10px;
@@ -243,7 +218,48 @@
             display: inline-block;
         }
 
-        /* ড্রপডাউন মেনু */
+        /* টুলস ও ব্লগ কার্ড ডিজাইন */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        .tool-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 15px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .tool-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .tool-info h3 {
+            font-size: 15px;
+            color: #00f2fe;
+            margin-bottom: 5px;
+        }
+        .tool-info p {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        .tool-link-btn {
+            background: var(--accent-gradient);
+            color: #0b0b14;
+            padding: 5px 12px;
+            font-size: 11px;
+            font-weight: bold;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
         .dropdown-menu {
             position: fixed;
             top: 75px;
@@ -256,22 +272,11 @@
             display: none;
             flex-direction: column;
             z-index: 1001;
-            overflow: hidden;
         }
 
         .dropdown-menu.active {
             display: flex;
         }
-
-        .dropdown-header-info {
-            padding: 15px;
-            background: #18182b;
-            border-bottom: 1px solid var(--border-color);
-            text-align: center;
-        }
-
-        .dropdown-header-info h4 { font-size: 14px; color: #fff; }
-        .dropdown-header-info p { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
 
         .dropdown-item {
             padding: 12px 18px;
@@ -282,9 +287,7 @@
             gap: 12px;
             font-size: 13px;
             border-bottom: 1px solid rgba(255,255,255,0.03);
-            transition: background 0.2s;
         }
-
         .dropdown-item:hover { background: #22223b; color: #00f2fe; }
 
         .developer-credit {
@@ -296,9 +299,6 @@
             border-top: 1px solid var(--border-color);
         }
 
-        .developer-credit a { color: #00f2fe; text-decoration: none; font-weight: bold; }
-
-        /* নিচের ফ্লোটিং নেভবার */
         .bottom-nav {
             position: fixed;
             bottom: 15px;
@@ -327,9 +327,10 @@
             align-items: center;
             font-size: 11px;
             gap: 3px;
-            transition: all 0.3s;
             flex: 1;
             cursor: pointer;
+            background: transparent;
+            border: none;
         }
 
         .nav-item i { font-size: 18px; }
@@ -342,7 +343,6 @@
             flex-direction: row;
             gap: 6px;
             font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.4);
         }
         .nav-item.active i { font-size: 15px; }
 
@@ -357,85 +357,88 @@
 </head>
 <body>
 
-    <!-- নোটিশ বোর্ড -->
     <div class="notice-ticker">
         <i class="fas fa-bullhorn"></i>
-        <marquee scrollamount="5" id="notice-marquee">স্বাগতম JRS Store এ! আর্টিকেল ও দরকারি টুলস লিংক পেতে সাথেই থাকুন।</marquee>
+        <marquee scrollamount="5" id="notice-marquee">স্বাগতম JRS Store এ! নতুন রুট মডিউল ও অ্যাপস পেতে সাথেই থাকুন।</marquee>
     </div>
 
-    <!-- হেডার -->
     <header>
-        <a href="https://jakariya41jr.xyz/" class="logo-area">
+        <a href="#" class="logo-area">
             <img src="https://github.com/jakariya41jr/Photos-Row-Link/raw/refs/heads/main/file_00000000798482079f843eb6f797f91d.png" alt="JRS Logo">
-            <span>JRS</span>
+            <span>JRS Store</span>
         </a>
         <div class="header-actions">
-            <button class="icon-btn" id="menu-btn" title="Menu"><i class="fas fa-bars"></i></button>
+            <button class="icon-btn" id="menu-btn"><i class="fas fa-bars"></i></button>
         </div>
     </header>
 
-    <!-- ড্রপডাউন মেনু -->
     <div class="dropdown-menu" id="dropdown-menu">
-        <div class="dropdown-header-info">
-            <h4>JRS Store</h4>
-            <p>Developer: Md Jakariya Hasan</p>
-        </div>
-        <a href="#" class="dropdown-item"><i class="fas fa-home" style="color: #2ecc71;"></i> Home</a>
-        <a href="#" class="dropdown-item"><i class="fas fa-th-large" style="color: #00f2fe;"></i> All Apps</a>
-        <a href="#" class="dropdown-item"><i class="fas fa-newspaper" style="color: #f39c12;"></i> Articles & Blog</a>
-        <a href="#" class="dropdown-item"><i class="fas fa-link" style="color: #3498db;"></i> Useful Web Tools</a>
+        <a href="#" class="dropdown-item" onclick="switchTab('home-section');"><i class="fas fa-home"></i> Home</a>
+        <a href="#" class="dropdown-item" onclick="switchTab('apps-section');"><i class="fas fa-th-large"></i> All Apps</a>
+        <a href="#" class="dropdown-item" onclick="switchTab('articles-section');"><i class="fas fa-newspaper"></i> Articles & Blog</a>
+        <a href="#" class="dropdown-item" onclick="switchTab('tools-section');"><i class="fas fa-tools"></i> Tools & Blog</a>
     </div>
 
     <div class="container">
-        <!-- ক্যাটাগরি ফিল্টার চিপস -->
-        <div class="category-filter-bar">
-            <div class="cat-chip active" onclick="filterCategory('All', this)">All</div>
-            <div class="cat-chip" onclick="filterCategory('Photo Editor', this)">Photo Editor</div>
-            <div class="cat-chip" onclick="filterCategory('Game', this)">Game</div>
-            <div class="cat-chip" onclick="filterCategory('Root modules', this)">Root Modules</div>
-            <div class="cat-chip" onclick="filterCategory('Video Editor', this)">Video Editor</div>
+        
+        <!-- ১. হোম সেকশন -->
+        <div id="home-section" class="page-section active-section">
+            <div class="category-filter-bar" id="category-bar">
+                <div class="cat-chip active" onclick="filterCategory('All', this)">All</div>
+            </div>
+
+            <div class="section-title"><i class="fas fa-fire-flame-curved"></i> Trending Apps (<span id="trending-count">0</span>)</div>
+            <div class="app-grid" id="trending-grid"><div class="loading-text">লোড হচ্ছে...</div></div>
+
+            <div class="section-title"><i class="fas fa-cloud-arrow-down"></i> Latest Updates (<span id="latest-count">0</span>)</div>
+            <div class="app-grid" id="latest-grid"><div class="loading-text">লোড হচ্ছে...</div></div>
         </div>
 
-        <!-- Trending Apps সেকশন -->
-        <div class="section-title"><i class="fas fa-fire-flame-curved"></i> Trending Apps (<span id="trending-count">0</span>)</div>
-        <div class="app-grid" id="trending-grid">
-            <div class="loading-text">লোড হচ্ছে...</div>
+        <!-- ২. অ্যাপস সেকশন -->
+        <div id="apps-section" class="page-section">
+            <div class="section-title"><i class="fas fa-th-large"></i> All Available Apps</div>
+            <div class="app-grid" id="all-apps-grid"><div class="loading-text">লোড হচ্ছে...</div></div>
         </div>
 
-        <!-- Latest Updates সেকশন -->
-        <div class="section-title"><i class="fas fa-cloud-arrow-down"></i> Latest Updates (<span id="latest-count">0</span>)</div>
-        <div class="app-grid" id="latest-grid">
-            <div class="loading-text">লোড হচ্ছে...</div>
+        <!-- ৩. আর্টিকেল সেকশন -->
+        <div id="articles-section" class="page-section">
+            <div class="section-title"><i class="fas fa-newspaper"></i> Articles & Blog</div>
+            <div id="articles-container" class="tools-grid"><div class="loading-text">কোনো আর্টিকেল পাওয়া যায়নি।</div></div>
         </div>
 
-        <!-- ফুটার -->
+        <!-- ৪. টুলস এবং ব্লগ সেকশন (রুট মডিউল ও দরকারি ওয়েবসাইট) -->
+        <div id="tools-section" class="page-section">
+            <div class="section-title"><i class="fas fa-tools"></i> Root Modules & Useful Web Tools</div>
+            <div id="tools-container" class="tools-grid"><div class="loading-text">লোড হচ্ছে...</div></div>
+        </div>
+
+        <!-- ডেভলপার ক্রেডিট একদম নিচে -->
         <div class="developer-credit">
-            Designed & Developed with ❤️ by <a href="https://jakariya41jr.xyz/" target="_blank">Md Jakariya Hasan</a><br>
+            Developed by Md Jakariya Hasan<br>
             &copy; 2026 JRS Store. All Rights Reserved.
         </div>
     </div>
 
-    <!-- নিচের ফ্লোটিং নেভবার (About এর বদলে Tools & Blog যুক্ত) -->
+    <!-- ফ্লোটিং নেভবার (সঠিক কার্যকারিতা সহ) -->
     <div class="bottom-nav">
-        <a href="#" class="nav-item active">
+        <button class="nav-item active" onclick="switchTab('home-section', this)">
             <i class="fas fa-home"></i>
             <span>Home</span>
-        </a>
-        <a href="#" class="nav-item">
+        </button>
+        <button class="nav-item" onclick="switchTab('apps-section', this)">
             <i class="fas fa-th-large"></i>
             <span>Apps</span>
-        </a>
-        <a href="#" class="nav-item">
+        </button>
+        <button class="nav-item" onclick="switchTab('articles-section', this)">
             <i class="fas fa-newspaper"></i>
             <span>Articles</span>
-        </a>
-        <a href="https://jakariya41jr.xyz/" target="_blank" class="nav-item">
+        </button>
+        <button class="nav-item" onclick="switchTab('tools-section', this)">
             <i class="fas fa-tools"></i>
             <span>Tools & Blog</span>
-        </a>
+        </button>
     </div>
 
-    <!-- Firebase ও ফিল্টারিং লজিক -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getDatabase, ref, onValue, update, get } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
@@ -454,27 +457,51 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
+        // ড্রপডাউন মেনু টগল
         const menuBtn = document.getElementById('menu-btn');
         const dropdownMenu = document.getElementById('dropdown-menu');
-
         menuBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             dropdownMenu.classList.toggle('active');
         });
+        window.addEventListener('click', () => dropdownMenu.classList.remove('active'));
 
-        window.addEventListener('click', () => {
+        // ট্যাব সুইচিং ফাংশন
+        window.switchTab = function(sectionId, btnElement) {
+            document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active-section'));
+            document.getElementById(sectionId).classList.add('active-section');
+            
+            if(btnElement) {
+                document.querySelectorAll('.bottom-nav .nav-item').forEach(btn => btn.classList.remove('active'));
+                btnElement.classList.add('active');
+            }
             dropdownMenu.classList.remove('active');
-        });
+            window.scrollTo(0, 0);
+        }
 
         let allAppsData = [];
-        let currentCategory = 'All';
 
+        // ক্যাটাগরি ডাটা ফেচ
+        const catRef = ref(db, 'categories');
+        onValue(catRef, (snapshot) => {
+            const data = snapshot.val();
+            const catBar = document.getElementById('category-bar');
+            catBar.innerHTML = `<div class="cat-chip active" onclick="filterCategory('All', this)">All</div>`;
+            if(data) {
+                Object.keys(data).forEach(key => {
+                    catBar.innerHTML += `<div class="cat-chip" onclick="filterCategory('${data[key].name}', this)">${data[key].name}</div>`;
+                });
+            }
+        });
+
+        // অ্যাপস ডাটা ফেচ
         const updatesRef = ref(db, 'latest_updates');
         onValue(updatesRef, (snapshot) => {
             const data = snapshot.val();
             if (data) {
                 allAppsData = Object.keys(data).map(key => ({ id: key, ...data[key] }));
                 renderApps(allAppsData);
+                renderAllAppsPage(allAppsData);
             } else {
                 document.getElementById('trending-grid').innerHTML = '<div class="loading-text">কোনো ট্রেন্ডিং অ্যাপ নেই।</div>';
                 document.getElementById('latest-grid').innerHTML = '<div class="loading-text">কোনো অ্যাপ পাওয়া যায়নি।</div>';
@@ -482,10 +509,8 @@
         });
 
         window.filterCategory = function(category, element) {
-            currentCategory = category;
             document.querySelectorAll('.cat-chip').forEach(el => el.classList.remove('active'));
             element.classList.add('active');
-
             let filtered = category === 'All' ? allAppsData : allAppsData.filter(app => app.category === category);
             renderApps(filtered);
         }
@@ -493,7 +518,6 @@
         function renderApps(appsArray) {
             const trendingGrid = document.getElementById('trending-grid');
             const latestGrid = document.getElementById('latest-grid');
-            
             trendingGrid.innerHTML = '';
             latestGrid.innerHTML = '';
 
@@ -506,27 +530,37 @@
 
             trendingArray.forEach(item => {
                 let downloadsText = item.downloads >= 1000 ? (item.downloads / 1000).toFixed(1) + 'K' : (item.downloads || 0);
-                const cardHTML = `
+                trendingGrid.innerHTML += `
                     <div class="app-card" onclick="handleDownload('${item.id}', '${item.download_url}')">
                         <div class="app-icon"><img src="${item.image_url}" alt="${item.title}" loading="lazy"></div>
                         <div class="app-title">${item.title}</div>
                         <div class="card-stars"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></div>
                         <div class="download-badge"><i class="fas fa-download"></i> ${downloadsText}</div>
-                    </div>
-                `;
-                trendingGrid.insertAdjacentHTML('beforeend', cardHTML);
+                    </div>`;
             });
 
             [...appsArray].reverse().forEach(item => {
-                const cardHTML = `
+                latestGrid.innerHTML += `
                     <div class="app-card" onclick="handleDownload('${item.id}', '${item.download_url}')">
                         <div class="app-icon"><img src="${item.image_url}" alt="${item.title}" loading="lazy"></div>
                         <div class="app-title">${item.title}</div>
                         <div class="card-stars"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></div>
                         <div class="mod-badge">${item.version || 'v1.0'}</div>
-                    </div>
-                `;
-                latestGrid.insertAdjacentHTML('beforeend', cardHTML);
+                    </div>`;
+            });
+        }
+
+        function renderAllAppsPage(appsArray) {
+            const allAppsGrid = document.getElementById('all-apps-grid');
+            allAppsGrid.innerHTML = '';
+            appsArray.forEach(item => {
+                allAppsGrid.innerHTML += `
+                    <div class="app-card" onclick="handleDownload('${item.id}', '${item.download_url}')">
+                        <div class="app-icon"><img src="${item.image_url}" alt="${item.title}" loading="lazy"></div>
+                        <div class="app-title">${item.title}</div>
+                        <div class="card-stars"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></div>
+                        <div class="mod-badge">${item.category || 'App'}</div>
+                    </div>`;
             });
         }
 
@@ -541,11 +575,34 @@
                 } else {
                     window.location.href = downloadUrl;
                 }
-            }).catch(() => {
-                window.location.href = downloadUrl;
-            });
+            }).catch(() => { window.location.href = downloadUrl; });
         };
 
+        // টুলস এবং ব্লগ ডাটা লোড
+        const toolsRef = ref(db, 'tools_modules');
+        onValue(toolsRef, (snapshot) => {
+            const data = snapshot.val();
+            const toolsContainer = document.getElementById('tools-container');
+            toolsContainer.innerHTML = '';
+            if(data) {
+                Object.keys(data).forEach(key => {
+                    let item = data[key];
+                    toolsContainer.innerHTML += `
+                        <div class="tool-card">
+                            <img src="${item.image_url}" class="tool-img" alt="${item.title}">
+                            <div class="tool-info">
+                                <h3>${item.title}</h3>
+                                <p>${item.description}</p>
+                                <a href="${item.download_url}" target="_blank" class="tool-link-btn"><i class="fas fa-external-link-alt"></i> Visit / Download</a>
+                            </div>
+                        </div>`;
+                });
+            } else {
+                toolsContainer.innerHTML = '<div class="loading-text">কোনো রুট মডিউল বা টুলস নেই।</div>';
+            }
+        });
+
+        // নোটিশ লোড
         const noticesRef = ref(db, 'notices');
         onValue(noticesRef, (snapshot) => {
             const data = snapshot.val();
