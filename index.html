@@ -64,6 +64,8 @@
             color: #fff;
             box-shadow: 0 4px 6px rgba(0,0,0,0.2);
             transition: transform 0.2s;
+            cursor: pointer;
+            display: block;
         }
 
         .app-card:hover {
@@ -168,19 +170,19 @@
     <!-- Firebase SDK ও রিয়েলটাইম ডেটা ফেচিং লজিক -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+        import { getDatabase, ref, onValue, update, get } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
 
-        // আপনার সঠিক ফায়ারবেস কনফিগারেশন
+        // আপনার সঠিক এবং আপডেট করা ফায়ারবেস কনফিগারেশন
         const firebaseConfig = {
             apiKey: "AIzaSyCTV_PGdsnI2Tcbou3IJUU_r8ylwev9fU0",
             authDomain: "jrs-store.firebaseapp.com",
-            databaseURL: "https://jrs-store-default-rtdb.firebaseio.com", // আপনার রিয়েলটাইম ডেটাবেস ইউআরএল ঠিক করা হয়েছে
+            databaseURL: "https://jrs-store-default-rtdb.asia-southeast1.firebasedatabase.app",
             projectId: "jrs-store",
             storageBucket: "jrs-store.firebasestorage.app",
             messagingSenderId: "253830850008",
-            appId: "1:253830850008:web:044aecd4131e90fd22fead",
-            measurementId: "G-0905YJJG19"
+            appId: "1:253830850008:web:65cf02177ba051ef22fead",
+            measurementId: "G-QPNBEJHBSF"
         };
 
         // ফায়ারবেস ইনিশিয়ালাইজ ও অ্যানালিটিক্স
@@ -199,7 +201,7 @@
                 Object.keys(data).forEach(key => {
                     const item = data[key];
                     const cardHTML = `
-                        <a href="details.php?id=${key}" class="app-card">
+                        <div class="app-card" onclick="handleDownload('${key}', '${item.download_url}')">
                             <div class="app-icon">
                                 <img src="${item.image_url}" alt="${item.title}" loading="lazy">
                             </div>
@@ -212,7 +214,7 @@
                                 <i class="${item.rating >= 4.5 ? 'fas fa-star-half-alt' : 'far fa-star'}" style="color:${item.rating >= 4.5 ? '#ffbf00' : '#ccc'};"></i>
                             </div>
                             <div class="mod-badge">${item.version}</div>
-                        </a>
+                        </div>
                     `;
                     appGrid.insertAdjacentHTML('beforeend', cardHTML);
                 });
@@ -220,6 +222,24 @@
                 appGrid.innerHTML = '<div class="loading-text">কোনো অ্যাপ পাওয়া যায়নি।</div>';
             }
         });
+
+        // ডাউনলোড কাউন্ট আপডেট করার ফাংশন
+        window.handleDownload = function(appKey, downloadUrl) {
+            const appRef = ref(db, 'latest_updates/' + appKey);
+            get(appRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const currentDownloads = snapshot.val().downloads || 0;
+                    // ডাটাবেজে ডাউনলোড সংখ্যা ১ বাড়িয়ে দেওয়া হচ্ছে
+                    update(appRef, { downloads: currentDownloads + 1 }).then(() => {
+                        window.location.href = downloadUrl;
+                    });
+                } else {
+                    window.location.href = downloadUrl;
+                }
+            }).catch(() => {
+                window.location.href = downloadUrl;
+            });
+        };
 
         // ২. Notices ডেটা লোড করা
         const noticesRef = ref(db, 'notices');
