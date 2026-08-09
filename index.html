@@ -112,7 +112,6 @@
             padding: 0 15px;
         }
 
-        /* পেজ সেকশন টেস্টিং */
         .page-section {
             display: none;
         }
@@ -218,7 +217,6 @@
             display: inline-block;
         }
 
-        /* টুলস ও ব্লগ কার্ড ডিজাইন */
         .tools-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -381,7 +379,6 @@
 
     <div class="container">
         
-        <!-- ১. হোম সেকশন -->
         <div id="home-section" class="page-section active-section">
             <div class="category-filter-bar" id="category-bar">
                 <div class="cat-chip active" onclick="filterCategory('All', this)">All</div>
@@ -394,32 +391,27 @@
             <div class="app-grid" id="latest-grid"><div class="loading-text">লোড হচ্ছে...</div></div>
         </div>
 
-        <!-- ২. অ্যাপস সেকশন -->
         <div id="apps-section" class="page-section">
             <div class="section-title"><i class="fas fa-th-large"></i> All Available Apps</div>
             <div class="app-grid" id="all-apps-grid"><div class="loading-text">লোড হচ্ছে...</div></div>
         </div>
 
-        <!-- ৩. আর্টিকেল সেকশন -->
         <div id="articles-section" class="page-section">
             <div class="section-title"><i class="fas fa-newspaper"></i> Articles & Blog</div>
-            <div id="articles-container" class="tools-grid"><div class="loading-text">কোনো আর্টিকেল পাওয়া যায়নি।</div></div>
+            <div id="articles-container" class="tools-grid"><div class="loading-text">লোড হচ্ছে...</div></div>
         </div>
 
-        <!-- ৪. টুলস এবং ব্লগ সেকশন (রুট মডিউল ও দরকারি ওয়েবসাইট) -->
         <div id="tools-section" class="page-section">
             <div class="section-title"><i class="fas fa-tools"></i> Root Modules & Useful Web Tools</div>
             <div id="tools-container" class="tools-grid"><div class="loading-text">লোড হচ্ছে...</div></div>
         </div>
 
-        <!-- ডেভলপার ক্রেডিট একদম নিচে -->
         <div class="developer-credit">
             Developed by Md Jakariya Hasan<br>
             &copy; 2026 JRS Store. All Rights Reserved.
         </div>
     </div>
 
-    <!-- ফ্লোটিং নেভবার (সঠিক কার্যকারিতা সহ) -->
     <div class="bottom-nav">
         <button class="nav-item active" onclick="switchTab('home-section', this)">
             <i class="fas fa-home"></i>
@@ -474,6 +466,11 @@
             if(btnElement) {
                 document.querySelectorAll('.bottom-nav .nav-item').forEach(btn => btn.classList.remove('active'));
                 btnElement.classList.add('active');
+            } else {
+                // আপডেট: ড্রপডাউন থেকে সিলেক্ট করলে যেন bottom-nav এর একটিভ স্টাইল চেঞ্জ হয়
+                document.querySelectorAll('.bottom-nav .nav-item').forEach(btn => btn.classList.remove('active'));
+                let correspondingBtn = Array.from(document.querySelectorAll('.bottom-nav .nav-item')).find(el => el.getAttribute('onclick').includes(sectionId));
+                if(correspondingBtn) correspondingBtn.classList.add('active');
             }
             dropdownMenu.classList.remove('active');
             window.scrollTo(0, 0);
@@ -505,6 +502,7 @@
             } else {
                 document.getElementById('trending-grid').innerHTML = '<div class="loading-text">কোনো ট্রেন্ডিং অ্যাপ নেই।</div>';
                 document.getElementById('latest-grid').innerHTML = '<div class="loading-text">কোনো অ্যাপ পাওয়া যায়নি।</div>';
+                document.getElementById('all-apps-grid').innerHTML = '<div class="loading-text">কোনো অ্যাপ পাওয়া যায়নি।</div>';
             }
         });
 
@@ -564,18 +562,19 @@
             });
         }
 
+        // ফিক্সড: নতুন ট্যাবে ডাউনলোড ওপেন হবে যেন আপনার সাইট ইউজার হারিয়ে না ফেলে
         window.handleDownload = function(appKey, downloadUrl) {
             const appRef = ref(db, 'latest_updates/' + appKey);
             get(appRef).then((snapshot) => {
                 if (snapshot.exists()) {
                     const currentDownloads = snapshot.val().downloads || 0;
                     update(appRef, { downloads: currentDownloads + 1 }).then(() => {
-                        window.location.href = downloadUrl;
+                        window.open(downloadUrl, '_blank');
                     });
                 } else {
-                    window.location.href = downloadUrl;
+                    window.open(downloadUrl, '_blank');
                 }
-            }).catch(() => { window.location.href = downloadUrl; });
+            }).catch(() => { window.open(downloadUrl, '_blank'); });
         };
 
         // টুলস এবং ব্লগ ডাটা লোড
@@ -602,6 +601,28 @@
             }
         });
 
+        // ফিক্সড: আর্টিকেল সেকশন যোগ করা হয়েছে (site_updates)
+        const articlesRef = ref(db, 'site_updates');
+        onValue(articlesRef, (snapshot) => {
+            const data = snapshot.val();
+            const articlesContainer = document.getElementById('articles-container');
+            articlesContainer.innerHTML = '';
+            if (data) {
+                Object.values(data).reverse().forEach(item => {
+                    articlesContainer.innerHTML += `
+                        <div class="tool-card" style="display: block;">
+                            <div class="tool-info">
+                                <h3>${item.title}</h3>
+                                <p>${item.description}</p>
+                                ${item.link ? `<a href="${item.link}" target="_blank" class="tool-link-btn" style="margin-top: 5px;"><i class="fas fa-arrow-right"></i> Read More</a>` : ''}
+                            </div>
+                        </div>`;
+                });
+            } else {
+                articlesContainer.innerHTML = '<div class="loading-text">কোনো আর্টিকেল পাওয়া যায়নি।</div>';
+            }
+        });
+
         // নোটিশ লোড
         const noticesRef = ref(db, 'notices');
         onValue(noticesRef, (snapshot) => {
@@ -613,6 +634,8 @@
                     noticesText += " 🔥 " + data[key].title + " - " + data[key].body + " &nbsp;&nbsp;&nbsp;&nbsp; | ";
                 });
                 marquee.innerHTML = noticesText;
+            } else {
+                marquee.innerHTML = "স্বাগতম JRS Store এ! নতুন রুট মডিউল ও অ্যাপস পেতে সাথেই থাকুন।";
             }
         });
     </script>
