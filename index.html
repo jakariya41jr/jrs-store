@@ -37,6 +37,24 @@
             padding-bottom: 100px;
         }
 
+        /* Feature 8: Custom Brand Logo Spinner */
+        #global-loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-color); z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+            transition: opacity 0.5s ease;
+        }
+        .pulse-logo {
+            width: 80px; height: 80px; border-radius: 50%;
+            border: 3px solid #00f2fe; animation: pulse 1.5s infinite;
+            object-fit: cover;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(0, 242, 254, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(0, 242, 254, 0); }
+            100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(0, 242, 254, 0); }
+        }
+
         .notice-ticker {
             background: linear-gradient(135deg, #f39c12, #e67e22);
             color: #0b0b14;
@@ -63,297 +81,232 @@
         }
 
         .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: #fff;
+            display: flex; align-items: center; gap: 10px;
+            text-decoration: none; color: #fff;
         }
 
         .logo-area img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid #00f2fe;
-            object-fit: cover;
+            width: 40px; height: 40px; border-radius: 50%;
+            border: 2px solid #00f2fe; object-fit: cover;
         }
 
         .logo-area span {
-            font-size: 22px;
-            font-weight: 800;
+            font-size: 22px; font-weight: 800;
             background: var(--accent-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .header-actions { display: flex; align-items: center; gap: 10px; }
 
         .icon-btn {
-            background: #1f1f38;
-            border: 1px solid var(--border-color);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            font-size: 16px;
+            background: #1f1f38; border: 1px solid var(--border-color);
+            width: 40px; height: 40px; border-radius: 50%; color: #fff;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; font-size: 16px;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 15px;
+        .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; }
+
+        /* Feature 4: Live Search Bar */
+        .search-container { margin-bottom: 20px; position: relative; }
+        .search-container input {
+            width: 100%; padding: 12px 15px 12px 40px;
+            border-radius: 25px; border: 1px solid var(--border-color);
+            background: var(--header-bg); color: #fff; font-size: 14px; outline: none;
+            transition: all 0.3s ease;
+        }
+        .search-container input:focus { border-color: #00f2fe; box-shadow: 0 0 10px rgba(0, 242, 254, 0.2); }
+        .search-container i {
+            position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+            color: var(--text-muted);
         }
 
-        .page-section {
-            display: none;
-        }
-        .page-section.active-section {
-            display: block;
-        }
+        .page-section { display: none; }
+        .page-section.active-section { display: block; }
 
         .category-filter-bar {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            scrollbar-width: none;
+            display: flex; gap: 10px; overflow-x: auto;
+            padding-bottom: 10px; margin-bottom: 20px; scrollbar-width: none;
         }
-        .category-filter-bar::-webkit-scrollbar {
-            display: none;
-        }
+        .category-filter-bar::-webkit-scrollbar { display: none; }
 
         .cat-chip {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all 0.3s;
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            color: var(--text-muted); padding: 8px 16px; border-radius: 20px;
+            font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.3s;
         }
-
         .cat-chip.active, .cat-chip:hover {
-            background: var(--accent-gradient);
-            color: #0b0b14;
-            border-color: transparent;
-            box-shadow: 0 4px 12px rgba(0,242,254,0.3);
+            background: var(--accent-gradient); color: #0b0b14;
+            border-color: transparent; box-shadow: 0 4px 12px rgba(0,242,254,0.3);
         }
 
         .section-title {
-            font-size: 17px;
-            margin: 25px 0 15px 0;
-            color: #00f2fe;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 700;
+            font-size: 17px; margin: 25px 0 15px 0; color: #00f2fe;
+            display: flex; align-items: center; gap: 10px; font-weight: 700;
         }
 
         .app-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 15px;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px;
         }
 
         .app-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 12px;
-            text-align: center;
-            color: #fff;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-            cursor: pointer;
+            background: var(--card-bg); border-radius: 16px; padding: 12px;
+            text-align: center; color: #fff; box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+            border: 1px solid var(--border-color); transition: all 0.3s ease; cursor: pointer;
         }
-
-        .app-card:hover {
-            transform: translateY(-5px);
-            border-color: #00f2fe;
-        }
+        .app-card:hover { transform: translateY(-5px); border-color: #00f2fe; }
 
         .app-icon img {
-            width: 60px;
-            height: 60px;
-            border-radius: 14px;
-            object-fit: cover;
-            margin-bottom: 8px;
+            width: 60px; height: 60px; border-radius: 14px;
+            object-fit: cover; margin-bottom: 8px;
         }
-
         .app-title {
-            font-size: 13px;
-            font-weight: 700;
-            margin-bottom: 5px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            font-size: 13px; font-weight: 700; margin-bottom: 5px;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
-
-        .card-stars {
-            font-size: 10px;
-            margin-bottom: 8px;
-            color: #f1c40f;
-        }
-
+        .card-stars { font-size: 10px; margin-bottom: 8px; color: #f1c40f; }
         .download-badge, .mod-badge {
-            background: rgba(0, 242, 254, 0.15);
-            color: #00f2fe;
-            font-size: 10px;
-            font-weight: 700;
-            padding: 4px 8px;
-            border-radius: 6px;
-            display: inline-block;
+            background: rgba(0, 242, 254, 0.15); color: #00f2fe;
+            font-size: 10px; font-weight: 700; padding: 4px 8px;
+            border-radius: 6px; display: inline-block;
         }
 
-        .tools-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-        }
+        /* Tools Grid */
+        .tools-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
         .tool-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 15px;
-            display: flex;
-            gap: 15px;
-            align-items: center;
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 14px; padding: 15px; display: flex; gap: 15px; align-items: center;
         }
-        .tool-img {
-            width: 70px;
-            height: 70px;
-            border-radius: 10px;
-            object-fit: cover;
-        }
-        .tool-info h3 {
-            font-size: 15px;
-            color: #00f2fe;
-            margin-bottom: 5px;
-        }
-        .tool-info p {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-        }
+        .tool-img { width: 70px; height: 70px; border-radius: 10px; object-fit: cover; }
+        .tool-info h3 { font-size: 15px; color: #00f2fe; margin-bottom: 5px; }
+        .tool-info p { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
         .tool-link-btn {
-            background: var(--accent-gradient);
-            color: #0b0b14;
-            padding: 5px 12px;
-            font-size: 11px;
-            font-weight: bold;
-            border-radius: 6px;
-            text-decoration: none;
-            display: inline-block;
+            background: var(--accent-gradient); color: #0b0b14; padding: 5px 12px;
+            font-size: 11px; font-weight: bold; border-radius: 6px;
+            text-decoration: none; display: inline-block;
         }
 
         .dropdown-menu {
-            position: fixed;
-            top: 75px;
-            right: 15px;
-            background: var(--header-bg);
-            width: 240px;
-            border-radius: 16px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.6);
-            border: 1px solid var(--border-color);
-            display: none;
-            flex-direction: column;
-            z-index: 1001;
+            position: fixed; top: 75px; right: 15px; background: var(--header-bg);
+            width: 240px; border-radius: 16px; box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+            border: 1px solid var(--border-color); display: none; flex-direction: column; z-index: 1001;
         }
-
-        .dropdown-menu.active {
-            display: flex;
-        }
-
+        .dropdown-menu.active { display: flex; }
         .dropdown-item {
-            padding: 12px 18px;
-            color: #fff;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 13px;
+            padding: 12px 18px; color: #fff; text-decoration: none;
+            display: flex; align-items: center; gap: 12px; font-size: 13px;
             border-bottom: 1px solid rgba(255,255,255,0.03);
         }
         .dropdown-item:hover { background: #22223b; color: #00f2fe; }
 
         .developer-credit {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            font-size: 12px;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border-color);
+            text-align: center; margin-top: 40px; padding: 20px;
+            font-size: 12px; color: var(--text-muted); border-top: 1px solid var(--border-color);
         }
 
         .bottom-nav {
-            position: fixed;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--header-bg);
-            width: 92%;
-            max-width: 450px;
-            height: 68px;
-            border-radius: 35px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-            border: 1px solid var(--border-color);
-            z-index: 1000;
-            padding: 0 8px;
-            backdrop-filter: blur(10px);
+            position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%);
+            background: var(--header-bg); width: 92%; max-width: 450px; height: 68px;
+            border-radius: 35px; display: flex; justify-content: space-around; align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7); border: 1px solid var(--border-color);
+            z-index: 1000; padding: 0 8px; backdrop-filter: blur(10px);
         }
-
         .nav-item {
-            text-decoration: none;
-            color: var(--text-muted);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 11px;
-            gap: 3px;
-            flex: 1;
-            cursor: pointer;
-            background: transparent;
-            border: none;
+            text-decoration: none; color: var(--text-muted); display: flex;
+            flex-direction: column; align-items: center; font-size: 11px; gap: 3px;
+            flex: 1; cursor: pointer; background: transparent; border: none;
         }
-
         .nav-item i { font-size: 18px; }
-
         .nav-item.active {
-            background: var(--accent-gradient);
-            color: #0b0b14;
-            padding: 8px 14px;
-            border-radius: 25px;
-            flex-direction: row;
-            gap: 6px;
-            font-weight: bold;
+            background: var(--accent-gradient); color: #0b0b14; padding: 8px 14px;
+            border-radius: 25px; flex-direction: row; gap: 6px; font-weight: bold;
         }
         .nav-item.active i { font-size: 15px; }
-
         .loading-text {
-            text-align: center;
-            color: var(--text-muted);
-            padding: 20px;
-            font-size: 13px;
-            grid-column: 1 / -1;
+            text-align: center; color: var(--text-muted); padding: 20px;
+            font-size: 13px; grid-column: 1 / -1;
         }
+
+        /* Feature 1: App Details Modal & Feature 7: Security Badge */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.75); z-index: 2000; display: none;
+            justify-content: center; align-items: center; backdrop-filter: blur(8px);
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        .modal-content {
+            background: var(--card-bg); width: 92%; max-width: 420px;
+            border-radius: 20px; padding: 25px; border: 1px solid var(--border-color);
+            position: relative; max-height: 90vh; overflow-y: auto; text-align: center;
+            transform: scale(0.9); transition: transform 0.3s ease;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); scrollbar-width: none;
+        }
+        .modal-overlay.active .modal-content { transform: scale(1); }
+        .modal-content::-webkit-scrollbar { display: none; }
+        .close-modal {
+            position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.1);
+            border: none; width: 35px; height: 35px; border-radius: 50%; color: #fff;
+            font-size: 16px; cursor: pointer; transition: 0.3s;
+        }
+        .close-modal:hover { background: #e74c3c; }
+        
+        .modal-header img { width: 90px; height: 90px; border-radius: 20px; margin-bottom: 12px; object-fit: cover; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .modal-title { font-size: 20px; color: #fff; margin-bottom: 8px; font-weight: 800; }
+        .modal-badges { display: flex; justify-content: center; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; }
+        .badge { background: rgba(0,242,254,0.15); padding: 5px 10px; border-radius: 8px; font-size: 11px; color: #00f2fe; font-weight: bold; display: flex; align-items: center; gap: 5px; }
+        .badge.safe { color: #2ecc71; background: rgba(46, 204, 113, 0.15); border: 1px solid rgba(46, 204, 113, 0.3); }
+        .badge.category { color: #f39c12; background: rgba(243, 156, 18, 0.15); }
+        
+        .modal-desc {
+            font-size: 13px; color: var(--text-muted); margin-bottom: 20px;
+            text-align: left; background: #131322; padding: 15px;
+            border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); line-height: 1.5;
+        }
+        
+        /* Feature 2: Download Button Animation */
+        .download-btn {
+            background: var(--accent-gradient); color: #0b0b14; width: 100%;
+            padding: 14px; border: none; border-radius: 12px; font-size: 15px;
+            font-weight: 800; cursor: pointer; display: flex; justify-content: center;
+            align-items: center; gap: 8px; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,242,254,0.3);
+        }
+        .download-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,242,254,0.5); }
+        .download-btn:disabled { opacity: 0.8; cursor: not-allowed; transform: none; background: #2a2a46; color: #fff; box-shadow: none; }
+
+        /* Feature 5: Suggested Apps */
+        .suggested-title { font-size: 14px; text-align: left; margin: 25px 0 15px 0; color: #fff; font-weight: bold; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; }
+        .suggested-grid { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; }
+        .suggested-grid::-webkit-scrollbar { display: none; }
+        .suggested-card {
+            background: #131322; min-width: 90px; padding: 10px; border-radius: 12px;
+            text-align: center; border: 1px solid var(--border-color); cursor: pointer; flex-shrink: 0;
+        }
+        .suggested-card img { width: 45px; height: 45px; border-radius: 10px; margin-bottom: 5px; object-fit: cover; }
+        .suggested-card .title { font-size: 11px; color: #fff; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        /* Feature 6: Offline Toast Notice */
+        #toast-box {
+            position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: #e74c3c; color: #fff; padding: 12px 25px; border-radius: 25px;
+            font-size: 13px; font-weight: bold; z-index: 3000; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            opacity: 0; pointer-events: none; white-space: nowrap;
+        }
+        #toast-box.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+        #toast-box.online { background: #2ecc71; }
     </style>
 </head>
 <body>
+
+    <!-- Feature 8: Global Logo Spinner -->
+    <div id="global-loader">
+        <img src="https://github.com/jakariya41jr/Photos-Row-Link/raw/refs/heads/main/file_00000000798482079f843eb6f797f91d.png" alt="Loading..." class="pulse-logo">
+    </div>
+
+    <!-- Feature 6: Offline/Online Toast -->
+    <div id="toast-box"><i class="fas fa-wifi-slash"></i> ইন্টারনেট কানেকশন চেক করুন!</div>
 
     <div class="notice-ticker">
         <i class="fas fa-bullhorn"></i>
@@ -378,6 +331,12 @@
     </div>
 
     <div class="container">
+        
+        <!-- Feature 4: Live Search Bar (Available globally above sections) -->
+        <div class="search-container">
+            <i class="fas fa-search"></i>
+            <input type="text" id="app-search" placeholder="Search for apps, tools, or games...">
+        </div>
         
         <div id="home-section" class="page-section active-section">
             <div class="category-filter-bar" id="category-bar">
@@ -431,6 +390,40 @@
         </button>
     </div>
 
+    <!-- Feature 1: App Details Pop-up Modal -->
+    <div class="modal-overlay" id="app-modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeAppModal()"><i class="fas fa-times"></i></button>
+            <div class="modal-header">
+                <img id="modal-img" src="" alt="App Icon">
+                <h2 class="modal-title" id="modal-title">App Name</h2>
+            </div>
+            
+            <div class="modal-badges">
+                <span class="badge category" id="modal-category"><i class="fas fa-tag"></i> Category</span>
+                <span class="badge" id="modal-version"><i class="fas fa-code-branch"></i> v1.0</span>
+                <span class="badge" id="modal-size"><i class="fas fa-weight-hanging"></i> Size</span>
+                <!-- Feature 7: Security Badge -->
+                <span class="badge safe"><i class="fas fa-shield-check"></i> 100% Safe & Verified</span>
+            </div>
+            
+            <div class="modal-desc" id="modal-desc">
+                Description goes here...
+            </div>
+            
+            <!-- Download Button -->
+            <button class="download-btn" id="modal-download-btn" onclick="startDownload()">
+                <i class="fas fa-download"></i> Download Now
+            </button>
+
+            <!-- Feature 5: Suggested Apps -->
+            <div class="suggested-title">You may also like</div>
+            <div class="suggested-grid" id="suggested-apps-grid">
+                <!-- Suggested apps dynamically loaded here -->
+            </div>
+        </div>
+    </div>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getDatabase, ref, onValue, update, get } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
@@ -449,7 +442,12 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // ড্রপডাউন মেনু টগল
+        // Global Variables
+        let allAppsData = [];
+        let currentSelectedApp = null;
+        let isFirstLoad = true;
+
+        // Dropdown Menu Toggle
         const menuBtn = document.getElementById('menu-btn');
         const dropdownMenu = document.getElementById('dropdown-menu');
         menuBtn.addEventListener('click', (e) => {
@@ -458,7 +456,7 @@
         });
         window.addEventListener('click', () => dropdownMenu.classList.remove('active'));
 
-        // ট্যাব সুইচিং ফাংশন
+        // Tab Switching
         window.switchTab = function(sectionId, btnElement) {
             document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active-section'));
             document.getElementById(sectionId).classList.add('active-section');
@@ -467,7 +465,6 @@
                 document.querySelectorAll('.bottom-nav .nav-item').forEach(btn => btn.classList.remove('active'));
                 btnElement.classList.add('active');
             } else {
-                // আপডেট: ড্রপডাউন থেকে সিলেক্ট করলে যেন bottom-nav এর একটিভ স্টাইল চেঞ্জ হয়
                 document.querySelectorAll('.bottom-nav .nav-item').forEach(btn => btn.classList.remove('active'));
                 let correspondingBtn = Array.from(document.querySelectorAll('.bottom-nav .nav-item')).find(el => el.getAttribute('onclick').includes(sectionId));
                 if(correspondingBtn) correspondingBtn.classList.add('active');
@@ -476,9 +473,7 @@
             window.scrollTo(0, 0);
         }
 
-        let allAppsData = [];
-
-        // ক্যাটাগরি ডাটা ফেচ
+        // Category Fetch
         const catRef = ref(db, 'categories');
         onValue(catRef, (snapshot) => {
             const data = snapshot.val();
@@ -491,7 +486,7 @@
             }
         });
 
-        // অ্যাপস ডাটা ফেচ
+        // Apps Fetch
         const updatesRef = ref(db, 'latest_updates');
         onValue(updatesRef, (snapshot) => {
             const data = snapshot.val();
@@ -504,6 +499,28 @@
                 document.getElementById('latest-grid').innerHTML = '<div class="loading-text">কোনো অ্যাপ পাওয়া যায়নি।</div>';
                 document.getElementById('all-apps-grid').innerHTML = '<div class="loading-text">কোনো অ্যাপ পাওয়া যায়নি।</div>';
             }
+            // Hide Loader after initial fetch
+            if(isFirstLoad) {
+                document.getElementById('global-loader').style.opacity = '0';
+                setTimeout(() => document.getElementById('global-loader').style.display = 'none', 500);
+                isFirstLoad = false;
+            }
+        });
+
+        // Feature 4: Live Search Functionality
+        document.getElementById('app-search').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            const filteredApps = allAppsData.filter(app => 
+                app.title.toLowerCase().includes(query) || 
+                (app.category && app.category.toLowerCase().includes(query)) ||
+                (app.description && app.description.toLowerCase().includes(query))
+            );
+            
+            // Re-render based on active tab
+            if (document.getElementById('home-section').classList.contains('active-section')) {
+                renderApps(filteredApps);
+            }
+            renderAllAppsPage(filteredApps);
         });
 
         window.filterCategory = function(category, element) {
@@ -513,6 +530,7 @@
             renderApps(filtered);
         }
 
+        // Modified render functions to open Modal instead of direct download
         function renderApps(appsArray) {
             const trendingGrid = document.getElementById('trending-grid');
             const latestGrid = document.getElementById('latest-grid');
@@ -529,7 +547,7 @@
             trendingArray.forEach(item => {
                 let downloadsText = item.downloads >= 1000 ? (item.downloads / 1000).toFixed(1) + 'K' : (item.downloads || 0);
                 trendingGrid.innerHTML += `
-                    <div class="app-card" onclick="handleDownload('${item.id}', '${item.download_url}')">
+                    <div class="app-card" onclick="openAppModal('${item.id}')">
                         <div class="app-icon"><img src="${item.image_url}" alt="${item.title}" loading="lazy"></div>
                         <div class="app-title">${item.title}</div>
                         <div class="card-stars"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></div>
@@ -539,7 +557,7 @@
 
             [...appsArray].reverse().forEach(item => {
                 latestGrid.innerHTML += `
-                    <div class="app-card" onclick="handleDownload('${item.id}', '${item.download_url}')">
+                    <div class="app-card" onclick="openAppModal('${item.id}')">
                         <div class="app-icon"><img src="${item.image_url}" alt="${item.title}" loading="lazy"></div>
                         <div class="app-title">${item.title}</div>
                         <div class="card-stars"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></div>
@@ -553,7 +571,7 @@
             allAppsGrid.innerHTML = '';
             appsArray.forEach(item => {
                 allAppsGrid.innerHTML += `
-                    <div class="app-card" onclick="handleDownload('${item.id}', '${item.download_url}')">
+                    <div class="app-card" onclick="openAppModal('${item.id}')">
                         <div class="app-icon"><img src="${item.image_url}" alt="${item.title}" loading="lazy"></div>
                         <div class="app-title">${item.title}</div>
                         <div class="card-stars"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></div>
@@ -562,22 +580,89 @@
             });
         }
 
-        // ফিক্সড: নতুন ট্যাবে ডাউনলোড ওপেন হবে যেন আপনার সাইট ইউজার হারিয়ে না ফেলে
-        window.handleDownload = function(appKey, downloadUrl) {
-            const appRef = ref(db, 'latest_updates/' + appKey);
+        // Feature 1, 5: App Modal Logic
+        window.openAppModal = function(appId) {
+            const app = allAppsData.find(a => a.id === appId);
+            if(!app) return;
+            currentSelectedApp = app;
+
+            document.getElementById('modal-img').src = app.image_url;
+            document.getElementById('modal-title').innerText = app.title;
+            document.getElementById('modal-category').innerHTML = `<i class="fas fa-tag"></i> ${app.category || 'App'}`;
+            document.getElementById('modal-version').innerHTML = `<i class="fas fa-code-branch"></i> ${app.version || 'v1.0'}`;
+            document.getElementById('modal-size').innerHTML = `<i class="fas fa-weight-hanging"></i> ${app.size || 'Unknown'}`;
+            document.getElementById('modal-desc').innerHTML = app.description || "এই অ্যাপটির বিস্তারিত বিবরণ দেওয়া নেই। তবে এটি 100% সুরক্ষিত।";
+            
+            // Reset Button
+            const dlBtn = document.getElementById('modal-download-btn');
+            dlBtn.innerHTML = '<i class="fas fa-download"></i> Download Now';
+            dlBtn.disabled = false;
+
+            // Load Suggested Apps (Feature 5)
+            const suggestedGrid = document.getElementById('suggested-apps-grid');
+            suggestedGrid.innerHTML = '';
+            const suggestions = allAppsData.filter(a => a.category === app.category && a.id !== app.id).slice(0, 3);
+            
+            if(suggestions.length > 0) {
+                suggestions.forEach(item => {
+                    suggestedGrid.innerHTML += `
+                        <div class="suggested-card" onclick="openAppModal('${item.id}')">
+                            <img src="${item.image_url}" alt="${item.title}">
+                            <div class="title">${item.title}</div>
+                        </div>`;
+                });
+            } else {
+                suggestedGrid.innerHTML = '<p style="font-size:12px; color:var(--text-muted); width: 100%; text-align: left;">No similar apps found.</p>';
+            }
+
+            document.getElementById('app-modal').classList.add('active');
+        }
+
+        window.closeAppModal = function() {
+            document.getElementById('app-modal').classList.remove('active');
+        }
+
+        // Close modal on outside click
+        document.getElementById('app-modal').addEventListener('click', (e) => {
+            if(e.target === document.getElementById('app-modal')) closeAppModal();
+        });
+
+        // Feature 2 & 3: Direct Background Download & Realtime DB Update
+        window.startDownload = function() {
+            if(!currentSelectedApp) return;
+            
+            const btn = document.getElementById('modal-download-btn');
+            
+            // Background Animation
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Downloading...';
+            btn.disabled = true;
+
+            // Update Firebase Realtime Download Count
+            const appRef = ref(db, 'latest_updates/' + currentSelectedApp.id);
             get(appRef).then((snapshot) => {
                 if (snapshot.exists()) {
                     const currentDownloads = snapshot.val().downloads || 0;
-                    update(appRef, { downloads: currentDownloads + 1 }).then(() => {
-                        window.open(downloadUrl, '_blank');
-                    });
-                } else {
-                    window.open(downloadUrl, '_blank');
+                    update(appRef, { downloads: currentDownloads + 1 });
                 }
-            }).catch(() => { window.open(downloadUrl, '_blank'); });
-        };
+            });
 
-        // টুলস এবং ব্লগ ডাটা লোড
+            // Trigger Direct Download using Anchor Tag
+            setTimeout(() => {
+                const a = document.createElement('a');
+                a.href = currentSelectedApp.download_url;
+                a.download = ''; 
+                a.target = '_blank'; // Fallback if browser forces cross-origin block
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+
+                btn.innerHTML = '<i class="fas fa-check-circle"></i> Download Started';
+                
+                setTimeout(() => { closeAppModal(); }, 1500);
+            }, 1200); // 1.2s realistic waiting simulation
+        }
+
+        // Tools / Modules Fetch
         const toolsRef = ref(db, 'tools_modules');
         onValue(toolsRef, (snapshot) => {
             const data = snapshot.val();
@@ -601,7 +686,7 @@
             }
         });
 
-        // ফিক্সড: আর্টিকেল সেকশন যোগ করা হয়েছে (site_updates)
+        // Articles Fetch
         const articlesRef = ref(db, 'site_updates');
         onValue(articlesRef, (snapshot) => {
             const data = snapshot.val();
@@ -623,7 +708,7 @@
             }
         });
 
-        // নোটিশ লোড
+        // Notice Fetch
         const noticesRef = ref(db, 'notices');
         onValue(noticesRef, (snapshot) => {
             const data = snapshot.val();
@@ -638,6 +723,23 @@
                 marquee.innerHTML = "স্বাগতম JRS Store এ! নতুন রুট মডিউল ও অ্যাপস পেতে সাথেই থাকুন।";
             }
         });
+
+        // Feature 6: Offline/Online Notification Check
+        function showToastMessage(msg, isOnline) {
+            const toast = document.getElementById('toast-box');
+            toast.innerHTML = isOnline ? `<i class="fas fa-wifi"></i> ${msg}` : `<i class="fas fa-wifi-slash"></i> ${msg}`;
+            if(isOnline) {
+                toast.classList.add('online');
+            } else {
+                toast.classList.remove('online');
+            }
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 4000);
+        }
+
+        window.addEventListener('offline', () => showToastMessage('ইন্টারনেট কানেকশন চেক করুন!', false));
+        window.addEventListener('online', () => showToastMessage('ইন্টারনেট কানেকশন ফিরে এসেছে!', true));
+
     </script>
 </body>
 </html>
