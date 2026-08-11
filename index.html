@@ -549,6 +549,15 @@
 
                 if(adContentHTML !== "") {
                     adWrapper.innerHTML = adContentHTML;
+                    
+                    // অ্যাড স্ক্রিপ্টগুলো যাতে ব্রাউজার সঠিকভাবে এক্সিকিউট করে তার জন্য এই সেকশন যুক্ত করা হয়েছে:
+                    Array.from(adWrapper.querySelectorAll('script')).forEach(oldScript => {
+                        const newScript = document.createElement('script');
+                        Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                        newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                        oldScript.parentNode.replaceChild(newScript, oldScript);
+                    });
+                    
                     adSlot.style.display = 'block';
                 } else {
                     adSlot.style.display = 'none';
