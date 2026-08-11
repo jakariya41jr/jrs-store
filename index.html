@@ -15,7 +15,6 @@
     <style>
         /* Base Themes & Variables */
         :root {
-            /* Dark Theme (Default) */
             --bg-color: #0b0b14;
             --header-bg: rgba(19, 19, 34, 0.95);
             --card-bg: #18182b;
@@ -24,13 +23,11 @@
             --text-muted: #8d8dae;
             --modal-bg: #131322;
             
-            /* Shared Colors */
             --accent-color: #00f2fe;
             --accent-gradient: linear-gradient(135deg, #00f2fe, #4facfe);
             --shadow-color: rgba(0,0,0,0.3);
         }
 
-        /* Light Theme Feature */
         [data-theme="light"] {
             --bg-color: #f4f7f6;
             --header-bg: rgba(255, 255, 255, 0.95);
@@ -55,10 +52,9 @@
             color: var(--text-main);
             padding-bottom: 100px;
             transition: background-color 0.3s ease, color 0.3s ease;
-            overscroll-behavior-y: contain; /* Needed for custom Pull-To-Refresh */
+            overscroll-behavior-y: contain;
         }
 
-        /* Feature: Pull-to-Refresh Indicator */
         #ptr-indicator {
             position: fixed;
             top: 0; left: 0; width: 100%;
@@ -73,7 +69,6 @@
             transition: transform 0.2s cubic-bezier(0.1, 0.6, 0.4, 1);
         }
 
-        /* Feature: Custom Brand Logo Spinner */
         #global-loader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--bg-color); z-index: 9999;
@@ -127,10 +122,9 @@
 
         .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; }
 
-        /* Feature: Ad Management Container */
         .sponsor-ad-container {
             width: 100%; border-radius: 12px; overflow: hidden;
-            margin-bottom: 20px; display: none; /* Hidden by default, controlled via Firebase */
+            margin-bottom: 20px; display: none;
             background: var(--card-bg); border: 1px solid var(--border-color);
             text-align: center; padding: 10px; box-shadow: 0 4px 10px var(--shadow-color);
         }
@@ -138,7 +132,6 @@
             display: block; font-size: 10px; color: var(--text-muted); margin-bottom: 5px; text-transform: uppercase;
         }
 
-        /* Live Search Bar */
         .search-container { margin-bottom: 20px; position: relative; }
         .search-container input {
             width: 100%; padding: 12px 15px 12px 40px;
@@ -243,7 +236,6 @@
 
         .loading-text { text-align: center; color: var(--text-muted); padding: 20px; font-size: 13px; grid-column: 1 / -1; }
 
-        /* App Details Pop-up Modal */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.6); z-index: 2000; display: none;
@@ -316,17 +308,14 @@
 </head>
 <body>
 
-    <!-- PTR Indicator -->
     <div id="ptr-indicator">
         <i class="fas fa-arrow-down"></i> <span>টেনে রিফ্রেশ করুন...</span>
     </div>
 
-    <!-- Global Logo Spinner -->
     <div id="global-loader">
         <img src="https://github.com/jakariya41jr/Photos-Row-Link/raw/refs/heads/main/file_00000000798482079f843eb6f797f91d.png" alt="Loading..." class="pulse-logo">
     </div>
 
-    <!-- Offline/Online Toast -->
     <div id="toast-box"><i class="fas fa-wifi-slash"></i> ইন্টারনেট কানেকশন চেক করুন!</div>
 
     <div class="notice-ticker">
@@ -340,7 +329,6 @@
             <span>JRS Store</span>
         </a>
         <div class="header-actions">
-            <!-- Theme Toggle Button -->
             <button class="icon-btn" id="theme-toggle-btn"><i class="fas fa-sun"></i></button>
             <button class="icon-btn" id="menu-btn"><i class="fas fa-bars"></i></button>
         </div>
@@ -355,13 +343,11 @@
 
     <div class="container">
         
-        <!-- Live Search Bar -->
         <div class="search-container">
             <i class="fas fa-search"></i>
             <input type="text" id="app-search" placeholder="Search for apps, tools, or games...">
         </div>
 
-        <!-- Ad Container Slot (Controlled via Firebase) -->
         <div class="sponsor-ad-container" id="global-ad-slot">
             <span class="ad-label">Advertisement</span>
             <div id="ad-content-wrapper"></div>
@@ -415,7 +401,6 @@
         </button>
     </div>
 
-    <!-- App Details Pop-up Modal -->
     <div class="modal-overlay" id="app-modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeAppModal()"><i class="fas fa-times"></i></button>
@@ -435,12 +420,10 @@
                 Description goes here...
             </div>
             
-            <!-- Download Button -->
             <button class="download-btn" id="modal-download-btn" onclick="startDownload()">
                 <i class="fas fa-download"></i> Download Now
             </button>
 
-            <!-- Suggested Apps -->
             <div class="suggested-title">You may also like</div>
             <div class="suggested-grid" id="suggested-apps-grid"></div>
         </div>
@@ -464,12 +447,10 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // Global Variables
         let allAppsData = [];
         let currentSelectedApp = null;
         let isFirstLoad = true;
         
-        // --- Feature: Theme Setup (Light/Dark) ---
         const themeBtn = document.getElementById('theme-toggle-btn');
         const themeIcon = themeBtn.querySelector('i');
         
@@ -491,8 +472,6 @@
             applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
         });
 
-
-        // --- Feature: Pull To Refresh (Modern Mobile Interaction) ---
         let touchStartY = 0;
         let pStart = { x: 0, y: 0 };
         const ptrIndicator = document.getElementById('ptr-indicator');
@@ -538,7 +517,6 @@
                 ptrText.innerText = "আপডেট হচ্ছে...";
                 ptrIcon.className = "fas fa-spinner fa-spin";
                 
-                // Simulate refresh and fetch latest data
                 setTimeout(() => {
                     location.reload(); 
                 }, 800);
@@ -548,9 +526,7 @@
             pStart.y = 0;
         });
 
-
-        // --- Feature: Firebase Ad Management (Adsterra / Direct Link) ---
-        let directAdLink = ""; // Will store ad link if active
+        let directAdLink = "";
         let adsEnabled = false;
 
         const adRef = ref(db, 'ad_settings');
@@ -563,11 +539,16 @@
                 adsEnabled = true;
                 directAdLink = data.adsterra_link || "";
                 
+                let adContentHTML = "";
                 if(data.banner_image && data.banner_url) {
-                    adWrapper.innerHTML = `<a href="${data.banner_url}" target="_blank"><img src="${data.banner_image}" style="width:100%; border-radius:8px;" alt="Sponsor"></a>`;
-                    adSlot.style.display = 'block';
-                } else if (data.banner_html) {
-                    adWrapper.innerHTML = data.banner_html;
+                    adContentHTML += `<a href="${data.banner_url}" target="_blank" style="display:block; margin-bottom:10px;"><img src="${data.banner_image}" style="width:100%; border-radius:8px;" alt="Sponsor"></a>`;
+                }
+                if (data.banner_html) {
+                    adContentHTML += `<div>${data.banner_html}</div>`;
+                }
+
+                if(adContentHTML !== "") {
+                    adWrapper.innerHTML = adContentHTML;
                     adSlot.style.display = 'block';
                 } else {
                     adSlot.style.display = 'none';
@@ -579,8 +560,6 @@
             }
         });
 
-
-        // Dropdown Menu Toggle
         const menuBtn = document.getElementById('menu-btn');
         const dropdownMenu = document.getElementById('dropdown-menu');
         menuBtn.addEventListener('click', (e) => {
@@ -589,7 +568,6 @@
         });
         window.addEventListener('click', () => dropdownMenu.classList.remove('active'));
 
-        // Tab Switching
         window.switchTab = function(sectionId, btnElement) {
             document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active-section'));
             document.getElementById(sectionId).classList.add('active-section');
@@ -606,7 +584,6 @@
             window.scrollTo(0, 0);
         }
 
-        // Fetch Data & Rendering (Apps, Categories, Articles, Tools, Notices)
         const catRef = ref(db, 'categories');
         onValue(catRef, (snapshot) => {
             const data = snapshot.val();
@@ -747,7 +724,7 @@
             if(e.target === document.getElementById('app-modal')) closeAppModal();
         });
 
-        // App Download logic including Smart Link Ad Monetization Integration
+        // Optimized Download Logic: Opens ad and triggers direct background auto-download securely
         window.startDownload = function() {
             if(!currentSelectedApp) return;
             
@@ -763,26 +740,25 @@
             });
 
             setTimeout(() => {
-                // If Ad setting is ON, popup the direct link ad in a new tab safely
+                // ১. অ্যাড সক্রিয় থাকলে নতুন ট্যাবে ওপেন হবে
                 if (adsEnabled && directAdLink !== "") {
                     window.open(directAdLink, '_blank');
                 }
 
-                // Proceed with actual file download silently in background
+                // ২. বর্তমান ট্যাবেই ব্যাকগ্রাউন্ডে সরাসরি অটো-ডাউনলোড শুরু হবে (পপ-আপ বাইপাস করার জন্য target = _self ব্যবহার করা হয়েছে)
                 const a = document.createElement('a');
                 a.href = currentSelectedApp.download_url;
                 a.download = ''; 
-                a.target = '_blank';
+                a.target = '_self'; 
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
 
                 btn.innerHTML = '<i class="fas fa-check-circle"></i> Download Started';
                 setTimeout(() => { closeAppModal(); }, 1500);
-            }, 1200);
+            }, 1000);
         }
 
-        // Additional Sections (Tools, Articles, Notices)
         onValue(ref(db, 'tools_modules'), (snapshot) => {
             const data = snapshot.val();
             const container = document.getElementById('tools-container');
@@ -830,7 +806,6 @@
             } else marquee.innerHTML = "স্বাগতম JRS Store এ! নতুন রুট মডিউল ও অ্যাপস পেতে সাথেই থাকুন।";
         });
 
-        // Offline Check
         function showToastMessage(msg, isOnline) {
             const toast = document.getElementById('toast-box');
             toast.innerHTML = isOnline ? `<i class="fas fa-wifi"></i> ${msg}` : `<i class="fas fa-wifi-slash"></i> ${msg}`;
