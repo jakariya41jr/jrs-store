@@ -1,51 +1,87 @@
 <!DOCTYPE html>
 <html lang="bn" data-theme="dark">
 <head>
+    <!-- ==========================================================================
+         1. META DATA & CHARACTER ENCODING SETTINGS
+         ========================================================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>JRS Store - Tools, Apps & Articles Platform</title>
+    <title>JRS Store - Ultimate Platform for Apps, Tools & Articles</title>
 
-    <!-- Meta Data & SEO Configuration -->
-    <meta name="description" content="JRS Store is the ultimate platform to download modded apps, tools, read useful articles, and find helpful website links curated by Md Jakariya Hasan.">
-    <meta name="keywords" content="JRS Store, Mod Apps, Photo Editor, Game, Root Modules, Video Editor, Md Jakariya Hasan, APK Download">
+    <!-- SEO & Metadata Configurations -->
+    <meta name="description" content="JRS Store - Download premium modded apps, root modules, web utilities, and read trending tech articles curated by Md Jakariya Hasan.">
+    <meta name="keywords" content="JRS Store, Mod Apps, Android Apps, Root Modules, Photo Editor, Video Editor, Md Jakariya Hasan, Web Tools">
     <meta name="author" content="Md Jakariya Hasan">
     <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0b0b14">
 
-    <!-- FontAwesome Icons & Google Fonts Integration -->
+    <!-- Open Graph Metadata for Social Sharing -->
+    <meta property="og:title" content="JRS Store - Apps, Tools & Articles">
+    <meta property="og:description" content="Get access to verified Android applications, root modules, and digital tools.">
+    <meta property="og:image" content="https://github.com/jakariya41jr/Photos-Row-Link/raw/refs/heads/main/file_00000000798482079f843eb6f797f91d.png">
+    <meta property="og:type" content="website">
+
+    <!-- External Icon Fonts & Google Typography -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 
+    <!-- ==========================================================================
+         2. COMPREHENSIVE CSS STYLESHEET ARCHITECTURE
+         ========================================================================== -->
     <style>
-        /* ==========================================================================
-           1. BASE THEMES & GLOBAL VARIABLES
-           ========================================================================== */
+        /* --------------------------------------------------------------------------
+           2.1 ROOT VARIABLE SYSTEM & THEME PALETTES
+           -------------------------------------------------------------------------- */
         :root {
             --bg-color: #0b0b14;
             --header-bg: rgba(19, 19, 34, 0.95);
-            --card-bg: #18182b;
-            --border-color: #2a2a46;
+            --card-bg: #141424;
+            --card-hover-bg: #1c1c32;
+            --border-color: #24243e;
+            --border-glow: rgba(0, 242, 254, 0.25);
             --text-main: #ffffff;
-            --text-muted: #8d8dae;
-            --modal-bg: #131322;
+            --text-muted: #8e8ea8;
+            --modal-bg: #121222;
 
+            /* Accent Color Gradients */
             --accent-color: #00f2fe;
-            --accent-gradient: linear-gradient(135deg, #00f2fe, #4facfe);
+            --accent-gradient: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
             --purple-gradient: linear-gradient(135deg, #7F00FF 0%, #E100FF 100%);
             --orange-gradient: linear-gradient(135deg, #FF512F 0%, #DD2476 100%);
-            --shadow-color: rgba(0,0,0,0.3);
+            --green-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+
+            /* Shadow Definitions */
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            --glow-shadow: 0 0 15px rgba(0, 242, 254, 0.15);
+
+            /* Layout Constants */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-pill: 30px;
+            --transition-speed: 0.3s;
         }
 
+        /* Light Theme Overrides */
         [data-theme="light"] {
-            --bg-color: #f4f7f6;
+            --bg-color: #f4f6fb;
             --header-bg: rgba(255, 255, 255, 0.95);
             --card-bg: #ffffff;
-            --border-color: #e0e5ec;
-            --text-main: #1a1a24;
-            --text-muted: #6b7280;
-            --modal-bg: #f8fafc;
-            --shadow-color: rgba(0,0,0,0.08);
+            --card-hover-bg: #f8fafc;
+            --border-color: #e2e8f0;
+            --border-glow: rgba(0, 168, 232, 0.2);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --modal-bg: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --glow-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
 
+        /* --------------------------------------------------------------------------
+           2.2 GLOBAL CSS RESET & TYPOGRAPHY
+           -------------------------------------------------------------------------- */
         * {
             margin: 0;
             padding: 0;
@@ -55,20 +91,43 @@
             word-break: break-word;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            padding-bottom: 90px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            overscroll-behavior-y: contain;
+            padding-bottom: 95px;
             min-height: 100vh;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            overscroll-behavior-y: contain;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* ==========================================================================
-           2. OVERLAYS & GLOBAL INDICATORS
-           ========================================================================== */
+        /* Scrollbar Customization */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
 
-        /* Maintenance Screen Overlay */
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: var(--radius-pill);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
+
+        /* --------------------------------------------------------------------------
+           2.3 MAINTENANCE & OVERLAY SCREENS
+           -------------------------------------------------------------------------- */
         #maintenance-screen {
             display: none;
             position: fixed;
@@ -86,24 +145,36 @@
         }
 
         #maintenance-screen i {
-            font-size: 60px;
+            font-size: 64px;
             color: #ffb703;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
+            animation: wrenchPulse 2s infinite ease-in-out;
+        }
+
+        @keyframes wrenchPulse {
+            0%, 100% {
+                transform: rotate(0deg) scale(1);
+            }
+            50% {
+                transform: rotate(15deg) scale(1.1);
+            }
         }
 
         #maintenance-screen h2 {
-            font-size: 22px;
-            color: #fff;
-            margin-bottom: 8px;
+            font-size: 24px;
+            color: #ffffff;
+            margin-bottom: 10px;
+            font-weight: 800;
         }
 
         #maintenance-screen p {
-            color: #8d8dae;
+            color: #8e8ea8;
             font-size: 14px;
-            max-width: 400px;
+            max-width: 420px;
+            line-height: 1.6;
         }
 
-        /* Pull to Refresh Bar */
+        /* Pull to Refresh Indicator Bar */
         #ptr-indicator {
             position: fixed;
             top: 0;
@@ -115,18 +186,18 @@
             padding: 12px;
             color: var(--accent-color);
             font-size: 13px;
-            font-weight: bold;
+            font-weight: 700;
             gap: 8px;
             transform: translateY(-100%);
-            z-index: 100;
+            z-index: 2000;
             background: var(--header-bg);
-            box-shadow: 0 4px 10px var(--shadow-color);
-            border-bottom-left-radius: 16px;
-            border-bottom-right-radius: 16px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            border-bottom: 1px solid var(--border-color);
             transition: transform 0.2s cubic-bezier(0.1, 0.6, 0.4, 1);
+            backdrop-filter: blur(12px);
         }
 
-        /* Preloader Screen */
+        /* Preloader Screen with Animated Logo */
         #global-loader {
             position: fixed;
             top: 0;
@@ -138,51 +209,70 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .pulse-logo-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .pulse-logo {
-            width: 75px;
-            height: 75px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             border: 3px solid #00f2fe;
-            animation: pulse 1.5s infinite;
+            animation: logoPulse 1.6s infinite ease-in-out;
             object-fit: cover;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
         }
 
-        @keyframes pulse {
+        @keyframes logoPulse {
             0% {
-                transform: scale(0.9);
+                transform: scale(0.92);
                 box-shadow: 0 0 0 0 rgba(0, 242, 254, 0.7);
             }
             70% {
                 transform: scale(1);
-                box-shadow: 0 0 0 15px rgba(0, 242, 254, 0);
+                box-shadow: 0 0 0 18px rgba(0, 242, 254, 0);
             }
             100% {
-                transform: scale(0.9);
+                transform: scale(0.92);
                 box-shadow: 0 0 0 0 rgba(0, 242, 254, 0);
             }
         }
 
         /* Announcement Notice Ticker */
         .notice-ticker {
-            background: linear-gradient(135deg, #f39c12, #e67e22);
+            background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
             color: #ffffff;
-            padding: 8px 14px;
+            padding: 7px 14px;
             font-size: 12px;
-            font-weight: bold;
+            font-weight: 700;
             display: flex;
             align-items: center;
             gap: 10px;
-            box-shadow: inset 0 -2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
             position: relative;
             z-index: 1001;
         }
 
-        /* ==========================================================================
-           3. HEADER & TOP NAVIGATION
-           ========================================================================== */
+        .notice-ticker i {
+            font-size: 14px;
+            animation: bellRing 1.5s infinite ease;
+        }
+
+        @keyframes bellRing {
+            0%, 100% { transform: rotate(0); }
+            20%, 60% { transform: rotate(15deg); }
+            40%, 80% { transform: rotate(-15deg); }
+        }
+
+        /* --------------------------------------------------------------------------
+           2.4 HEADER & TOP NAVIGATION
+           -------------------------------------------------------------------------- */
         header {
             background: var(--header-bg);
             padding: 10px 16px;
@@ -193,8 +283,9 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
-            transition: background 0.3s, border-color 0.3s;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: background var(--transition-speed), border-color var(--transition-speed);
         }
 
         .logo-area {
@@ -206,19 +297,21 @@
         }
 
         .logo-area img {
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             border: 2px solid #00f2fe;
             object-fit: cover;
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
         }
 
         .logo-area span {
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 800;
             background: var(--accent-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            letter-spacing: 0.2px;
         }
 
         .header-actions {
@@ -238,96 +331,71 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            font-size: 15px;
-            transition: 0.3s;
+            font-size: 14px;
+            transition: all var(--transition-speed) ease;
         }
 
         .icon-btn:hover {
             border-color: var(--accent-color);
             color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: var(--glow-shadow);
         }
 
+        /* Container Alignment */
         .container {
-            max-width: 1200px;
-            margin: 15px auto;
+            max-width: 1100px;
+            margin: 14px auto;
             padding: 0 14px;
         }
 
-        /* ==========================================================================
-           4. ADVERTISEMENT & COMPACT HERO BANNERS (REDUCED HEIGHT)
-           ========================================================================== */
-
-        /* Compact Sponsor/Ad Slots */
-        .sponsor-ad-container {
-            width: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 16px;
-            display: none;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            text-align: center;
-            padding: 8px;
-            box-shadow: 0 4px 10px var(--shadow-color);
-        }
-
-        .sponsor-ad-container span.ad-label {
-            display: block;
-            font-size: 9px;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .sponsor-ad-container img {
-            max-height: 110px;
-            width: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        /* Search Section */
+        /* --------------------------------------------------------------------------
+           2.5 LIVE SEARCH FIELD
+           -------------------------------------------------------------------------- */
         .search-container {
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             position: relative;
         }
 
         .search-container input {
             width: 100%;
-            padding: 10px 14px 10px 38px;
-            border-radius: 22px;
+            padding: 10px 14px 10px 40px;
+            border-radius: var(--radius-pill);
             border: 1px solid var(--border-color);
             background: var(--card-bg);
             color: var(--text-main);
             font-size: 13px;
+            font-weight: 500;
             outline: none;
-            transition: all 0.3s ease;
+            transition: all var(--transition-speed) ease;
             box-shadow: 0 4px 12px var(--shadow-color);
         }
 
         .search-container input:focus {
-            border-color: #00f2fe;
-            box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 12px rgba(0, 242, 254, 0.25);
         }
 
         .search-container i {
             position: absolute;
-            left: 14px;
+            left: 15px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-muted);
-            font-size: 13px;
+            font-size: 14px;
         }
 
-        /* Compact Banner Carousel (Height reduced to 105px for sleek view) */
+        /* --------------------------------------------------------------------------
+           2.6 ULTRA-SLIM HERO BANNER CAROUSEL (REDUCED HEIGHT: ~80px)
+           -------------------------------------------------------------------------- */
         .banner-carousel {
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             display: flex;
             gap: 10px;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             scrollbar-width: none;
+            padding-bottom: 2px;
         }
 
         .banner-carousel::-webkit-scrollbar {
@@ -335,21 +403,35 @@
         }
 
         .banner-item {
-            flex: 0 0 88%;
+            flex: 0 0 90%;
             scroll-snap-align: center;
-            border-radius: 12px;
+            border-radius: var(--radius-md);
             overflow: hidden;
             position: relative;
-            height: 105px;
+            height: 82px; /* Slim Compact Height */
             border: 1px solid var(--border-color);
             cursor: pointer;
             box-shadow: 0 4px 12px var(--shadow-color);
+            background: var(--card-bg);
+            transition: transform var(--transition-speed) ease, border-color var(--transition-speed) ease;
+        }
+
+        .banner-item:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
         }
 
         .banner-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center;
+            image-rendering: -webkit-optimize-contrast;
+            transition: transform 0.5s ease;
+        }
+
+        .banner-item:hover img {
+            transform: scale(1.03);
         }
 
         .banner-item .banner-overlay {
@@ -357,45 +439,72 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background: linear-gradient(transparent, rgba(0,0,0,0.85));
-            padding: 8px 10px;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(11, 11, 20, 0.85) 100%);
+            padding: 6px 10px;
+            display: flex;
+            align-items: flex-end;
         }
 
         .banner-item h4 {
-            font-size: 13px;
-            color: #fff;
+            font-size: 12px;
+            color: #ffffff;
             font-weight: 700;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        /* ==========================================================================
-           5. CONTENT SECTIONS & CATEGORIES FILTER BAR
-           ========================================================================== */
-        .page-section {
+        /* --------------------------------------------------------------------------
+           2.7 COMPACT SPONSOR AD CONTAINER (REDUCED HEIGHT: ~80px MAX)
+           -------------------------------------------------------------------------- */
+        .sponsor-ad-container {
+            width: 100%;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            margin-bottom: 14px;
             display: none;
-            animation: fadeIn 0.4s ease;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            padding: 6px;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            position: relative;
         }
 
-        .page-section.active-section {
+        .sponsor-ad-container span.ad-label {
+            display: inline-block;
+            font-size: 8px;
+            font-weight: 800;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            background: rgba(255,255,255,0.05);
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .sponsor-ad-container img {
+            max-height: 80px; /* Slim compact height for ad banners */
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: var(--radius-sm);
             display: block;
+            margin: 0 auto;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(5px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
+        /* --------------------------------------------------------------------------
+           2.8 CATEGORY FILTER CHIP BAR
+           -------------------------------------------------------------------------- */
         .category-filter-bar {
             display: flex;
             gap: 8px;
             overflow-x: auto;
-            padding-bottom: 8px;
-            margin-bottom: 16px;
+            padding-bottom: 6px;
+            margin-bottom: 14px;
             scrollbar-width: none;
         }
 
@@ -407,13 +516,14 @@
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             color: var(--text-muted);
-            padding: 6px 14px;
-            border-radius: 18px;
-            font-size: 12px;
+            padding: 5px 12px;
+            border-radius: var(--radius-pill);
+            font-size: 11px;
             font-weight: 600;
             cursor: pointer;
             white-space: nowrap;
-            transition: all 0.3s;
+            transition: all var(--transition-speed) ease;
+            user-select: none;
         }
 
         .cat-chip.active,
@@ -421,78 +531,117 @@
             background: var(--accent-gradient);
             color: #0b0b14;
             border-color: transparent;
-            box-shadow: 0 4px 10px rgba(0,242,254,0.3);
+            box-shadow: 0 3px 10px rgba(0, 242, 254, 0.3);
             font-weight: 800;
         }
 
         .section-title {
-            font-size: 15px;
-            margin: 20px 0 12px 0;
+            font-size: 14px;
+            margin: 18px 0 10px 0;
             color: var(--accent-color);
             display: flex;
             align-items: center;
             gap: 8px;
-            font-weight: 700;
+            font-weight: 800;
+            letter-spacing: 0.2px;
         }
 
-        /* ==========================================================================
-           6. APP CARDS & GRID LAYOUT
-           ========================================================================== */
+        .section-title i {
+            font-size: 13px;
+        }
+
+        /* --------------------------------------------------------------------------
+           2.9 APP GRID & COMPACT CARDS
+           -------------------------------------------------------------------------- */
+        .page-section {
+            display: none;
+            animation: sectionFadeIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .page-section.active-section {
+            display: block;
+        }
+
+        @keyframes sectionFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .app-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
+            gap: 10px;
         }
 
         .app-card {
             background: var(--card-bg);
-            border-radius: 14px;
-            padding: 10px;
+            border-radius: var(--radius-md);
+            padding: 10px 8px;
             text-align: center;
             color: var(--text-main);
-            box-shadow: 0 4px 12px var(--shadow-color);
+            box-shadow: 0 4px 10px var(--shadow-color);
             border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
+            transition: all var(--transition-speed) ease;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
 
         .app-card:hover {
-            transform: translateY(-4px);
-            border-color: #00f2fe;
+            transform: translateY(-3px);
+            border-color: var(--accent-color);
+            box-shadow: var(--glow-shadow);
         }
 
         .app-icon img {
-            width: 55px;
-            height: 55px;
-            border-radius: 12px;
+            width: 52px;
+            height: 52px;
+            border-radius: var(--radius-md);
             object-fit: cover;
             margin-bottom: 6px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .app-card:hover .app-icon img {
+            transform: scale(1.05);
         }
 
         .app-title {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             margin-bottom: 4px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            color: var(--text-main);
         }
 
         .card-stars {
-            font-size: 9px;
+            font-size: 8px;
             margin-bottom: 6px;
             color: #f1c40f;
+            display: flex;
+            justify-content: center;
+            gap: 2px;
         }
 
         .download-badge,
         .mod-badge {
-            background: rgba(0, 242, 254, 0.15);
+            background: rgba(0, 242, 254, 0.12);
             color: #008eb3;
             font-size: 9px;
-            font-weight: 700;
-            padding: 3px 6px;
-            border-radius: 5px;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 4px;
             display: inline-block;
+            border: 1px solid rgba(0, 242, 254, 0.2);
         }
 
         [data-theme="dark"] .download-badge,
@@ -500,88 +649,119 @@
             color: #00f2fe;
         }
 
-        /* ==========================================================================
-           7. ARTICLES & TOOLS GRID LAYOUT
-           ========================================================================== */
+        /* --------------------------------------------------------------------------
+           2.10 ARTICLES & TOOLS GRID LAYOUT
+           -------------------------------------------------------------------------- */
         .tools-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 12px;
+            gap: 10px;
         }
 
         .tool-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            box-shadow: 0 4px 12px var(--shadow-color);
-            border-radius: 12px;
-            padding: 12px;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            border-radius: var(--radius-md);
+            padding: 10px;
             display: flex;
-            gap: 12px;
+            gap: 10px;
             align-items: center;
+            transition: border-color var(--transition-speed) ease;
+        }
+
+        .tool-card:hover {
+            border-color: var(--accent-color);
         }
 
         .tool-img {
-            width: 60px;
-            height: 60px;
-            border-radius: 8px;
+            width: 55px;
+            height: 55px;
+            border-radius: var(--radius-sm);
             object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .tool-info {
+            flex-grow: 1;
         }
 
         .tool-info h3 {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--accent-color);
-            margin-bottom: 4px;
+            margin-bottom: 3px;
+            font-weight: 700;
         }
 
         .tool-info p {
             font-size: 11px;
             color: var(--text-muted);
             margin-bottom: 6px;
+            line-height: 1.4;
         }
 
         .tool-link-btn {
             background: var(--accent-gradient);
-            color: #fff;
-            padding: 5px 12px;
+            color: #0b0b14;
+            padding: 4px 10px;
             font-size: 10px;
-            font-weight: bold;
-            border-radius: 5px;
+            font-weight: 800;
+            border-radius: 4px;
             text-decoration: none;
             display: inline-block;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            transition: opacity var(--transition-speed) ease;
         }
 
-        /* ==========================================================================
-           8. NAVIGATION DROPDOWN & FOOTER CREDITS
-           ========================================================================== */
+        .tool-link-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* --------------------------------------------------------------------------
+           2.11 DROPDOWN MENU & FOOTER CREDITS
+           -------------------------------------------------------------------------- */
         .dropdown-menu {
             position: fixed;
-            top: 65px;
-            right: 15px;
+            top: 60px;
+            right: 14px;
             background: var(--card-bg);
-            width: 220px;
-            border-radius: 14px;
+            width: 210px;
+            border-radius: var(--radius-md);
             box-shadow: 0 12px 25px var(--shadow-color);
             border: 1px solid var(--border-color);
             display: none;
             flex-direction: column;
             z-index: 1001;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
         }
 
         .dropdown-menu.active {
             display: flex;
+            animation: dropdownSlide 0.25s ease;
+        }
+
+        @keyframes dropdownSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .dropdown-item {
-            padding: 11px 16px;
+            padding: 10px 14px;
             color: var(--text-main);
             text-decoration: none;
             display: flex;
             align-items: center;
             gap: 10px;
             font-size: 12px;
+            font-weight: 600;
             border-bottom: 1px solid var(--border-color);
-            transition: 0.2s;
+            transition: background var(--transition-speed) ease;
         }
 
         .dropdown-item:last-child {
@@ -589,30 +769,33 @@
         }
 
         .dropdown-item:hover {
-            background: rgba(0, 242, 254, 0.05);
+            background: rgba(0, 242, 254, 0.08);
             color: var(--accent-color);
         }
 
         .developer-credit {
             text-align: center;
-            margin-top: 30px;
-            padding: 16px;
+            margin-top: 25px;
+            padding: 14px;
             font-size: 11px;
             color: var(--text-muted);
             border-top: 1px solid var(--border-color);
+            line-height: 1.5;
         }
 
-        /* Bottom Floating Bar */
+        /* --------------------------------------------------------------------------
+           2.12 FLOATING BOTTOM NAVIGATION BAR
+           -------------------------------------------------------------------------- */
         .bottom-nav {
             position: fixed;
-            bottom: 12px;
+            bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
             background: var(--header-bg);
-            width: 90%;
-            max-width: 420px;
-            height: 60px;
-            border-radius: 30px;
+            width: 92%;
+            max-width: 400px;
+            height: 56px;
+            border-radius: var(--radius-pill);
             display: flex;
             justify-content: space-around;
             align-items: center;
@@ -620,8 +803,8 @@
             border: 1px solid var(--border-color);
             z-index: 1000;
             padding: 0 6px;
-            backdrop-filter: blur(10px);
-            transition: background 0.3s;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
         .nav-item {
@@ -631,31 +814,32 @@
             flex-direction: column;
             align-items: center;
             font-size: 10px;
+            font-weight: 600;
             gap: 2px;
             flex: 1;
             cursor: pointer;
             background: transparent;
             border: none;
-            transition: 0.3s;
+            transition: all var(--transition-speed) ease;
         }
 
         .nav-item i {
-            font-size: 16px;
+            font-size: 15px;
         }
 
         .nav-item.active {
             background: var(--accent-gradient);
-            color: #fff;
+            color: #0b0b14;
             padding: 6px 12px;
             border-radius: 20px;
             flex-direction: row;
-            gap: 5px;
-            font-weight: bold;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            gap: 6px;
+            font-weight: 800;
+            box-shadow: 0 3px 10px rgba(0, 242, 254, 0.3);
         }
 
         .nav-item.active i {
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .loading-text {
@@ -666,21 +850,21 @@
             grid-column: 1 / -1;
         }
 
-        /* ==========================================================================
-           9. MODAL VIEW & DOWNLOAD WINDOW
-           ========================================================================== */
+        /* --------------------------------------------------------------------------
+           2.13 MODAL DOWNLOAD WINDOW
+           -------------------------------------------------------------------------- */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.65);
+            background: rgba(0, 0, 0, 0.7);
             z-index: 2000;
             display: none;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(6px);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -693,15 +877,15 @@
         .modal-content {
             background: var(--card-bg);
             width: 90%;
-            max-width: 400px;
-            border-radius: 18px;
-            padding: 20px;
+            max-width: 380px;
+            border-radius: var(--radius-lg);
+            padding: 18px;
             border: 1px solid var(--border-color);
             position: relative;
-            max-height: 88vh;
+            max-height: 85vh;
             overflow-y: auto;
             text-align: center;
-            transform: scale(0.9);
+            transform: scale(0.92);
             transition: transform 0.3s ease;
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
             scrollbar-width: none;
@@ -719,33 +903,33 @@
             position: absolute;
             top: 12px;
             right: 12px;
-            background: rgba(128,128,128,0.2);
+            background: rgba(128, 128, 128, 0.15);
             border: none;
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             color: var(--text-main);
-            font-size: 15px;
+            font-size: 14px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: background var(--transition-speed) ease;
         }
 
         .close-modal:hover {
             background: #e74c3c;
-            color: #fff;
+            color: #ffffff;
         }
 
         .modal-header img {
-            width: 80px;
-            height: 80px;
-            border-radius: 16px;
-            margin-bottom: 10px;
+            width: 75px;
+            height: 75px;
+            border-radius: var(--radius-md);
+            margin-bottom: 8px;
             object-fit: cover;
             box-shadow: 0 4px 12px var(--shadow-color);
         }
 
         .modal-title {
-            font-size: 18px;
+            font-size: 17px;
             color: var(--text-main);
             margin-bottom: 6px;
             font-weight: 800;
@@ -760,15 +944,16 @@
         }
 
         .badge {
-            background: rgba(0,242,254,0.15);
-            padding: 4px 8px;
-            border-radius: 6px;
+            background: rgba(0, 242, 254, 0.12);
+            padding: 3px 8px;
+            border-radius: 5px;
             font-size: 10px;
             color: #008eb3;
-            font-weight: bold;
+            font-weight: 700;
             display: flex;
             align-items: center;
             gap: 4px;
+            border: 1px solid rgba(0, 242, 254, 0.2);
         }
 
         [data-theme="dark"] .badge {
@@ -777,13 +962,14 @@
 
         .badge.safe {
             color: #27ae60;
-            background: rgba(46, 204, 113, 0.15);
-            border: 1px solid rgba(46, 204, 113, 0.3);
+            background: rgba(46, 204, 113, 0.12);
+            border-color: rgba(46, 204, 113, 0.25);
         }
 
         .badge.category {
             color: #d35400;
-            background: rgba(243, 156, 18, 0.15);
+            background: rgba(243, 156, 18, 0.12);
+            border-color: rgba(243, 156, 18, 0.25);
         }
 
         [data-theme="dark"] .badge.safe {
@@ -797,55 +983,53 @@
         .modal-desc {
             font-size: 12px;
             color: var(--text-muted);
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             text-align: left;
             background: var(--modal-bg);
-            padding: 12px;
-            border-radius: 10px;
+            padding: 10px 12px;
+            border-radius: var(--radius-sm);
             border: 1px solid var(--border-color);
             line-height: 1.5;
         }
 
         .download-btn {
             background: var(--accent-gradient);
-            color: #fff;
+            color: #0b0b14;
             width: 100%;
-            padding: 12px;
+            padding: 11px;
             border: none;
-            border-radius: 10px;
-            font-size: 14px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
             font-weight: 800;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 8px;
-            transition: 0.3s;
-            box-shadow: 0 4px 12px rgba(0,242,254,0.3);
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 4px 12px rgba(0, 242, 254, 0.3);
         }
 
         .download-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0,242,254,0.5);
+            box-shadow: 0 6px 16px rgba(0, 242, 254, 0.45);
         }
 
         .download-btn:disabled {
-            opacity: 0.8;
+            opacity: 0.7;
             cursor: not-allowed;
             transform: none;
             background: var(--border-color);
             color: var(--text-muted);
             box-shadow: none;
-            text-shadow: none;
         }
 
         .suggested-title {
-            font-size: 13px;
+            font-size: 12px;
             text-align: left;
-            margin: 20px 0 10px 0;
+            margin: 16px 0 8px 0;
             color: var(--text-main);
-            font-weight: bold;
+            font-weight: 800;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 4px;
         }
@@ -864,14 +1048,14 @@
 
         .suggested-card {
             background: var(--modal-bg);
-            min-width: 80px;
-            padding: 8px;
-            border-radius: 10px;
+            min-width: 75px;
+            padding: 6px;
+            border-radius: var(--radius-sm);
             text-align: center;
             border: 1px solid var(--border-color);
             cursor: pointer;
             flex-shrink: 0;
-            transition: 0.3s;
+            transition: border-color var(--transition-speed) ease;
         }
 
         .suggested-card:hover {
@@ -879,36 +1063,38 @@
         }
 
         .suggested-card img {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
+            width: 38px;
+            height: 38px;
+            border-radius: 6px;
             margin-bottom: 4px;
             object-fit: cover;
         }
 
         .suggested-card .title {
-            font-size: 10px;
+            font-size: 9px;
             color: var(--text-main);
-            font-weight: 600;
+            font-weight: 700;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
-        /* Toast Popup Notification */
+        /* --------------------------------------------------------------------------
+           2.14 TOAST NOTIFICATION CONTAINER
+           -------------------------------------------------------------------------- */
         #toast-box {
             position: fixed;
-            bottom: 80px;
+            bottom: 75px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
             background: #e74c3c;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
+            color: #ffffff;
+            padding: 9px 18px;
+            border-radius: var(--radius-pill);
+            font-size: 11px;
+            font-weight: 800;
             z-index: 3000;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -930,111 +1116,161 @@
 </head>
 <body>
 
-    <!-- Maintenance Screen Overlay -->
+    <!-- ==========================================================================
+         3. MAINTENANCE SCREEN OVERLAY
+         ========================================================================== -->
     <div id="maintenance-screen">
         <i class="fas fa-screwdriver-wrench"></i>
         <h2 id="maint-title">ওয়েবসাইট রক্ষণাবেক্ষণ চলছে</h2>
-        <p id="maint-msg">আমরা সিস্টেম আপডেট করছি। অনুগ্রহ করে কিছুক্ষণ পর চেষ্টা করুন।</p>
+        <p id="maint-msg">আমরা সিস্টেম অপটিমাইজ করছি। অনুগ্রহ করে কিছুক্ষণ পর আবার চেষ্টা করুন।</p>
     </div>
 
-    <!-- Pull to Refresh Bar -->
+    <!-- ==========================================================================
+         4. PULL TO REFRESH INDICATOR
+         ========================================================================== -->
     <div id="ptr-indicator">
-        <i class="fas fa-arrow-down"></i> <span>টেনে রিফ্রেশ করুন...</span>
+        <i class="fas fa-arrow-down"></i> <span id="ptr-text">টেনে রিফ্রেশ করুন...</span>
     </div>
 
-    <!-- Global Preloader Screen -->
+    <!-- ==========================================================================
+         5. GLOBAL PRELOADER LOGO SCREEN
+         ========================================================================== -->
     <div id="global-loader">
-        <img src="https://github.com/jakariya41jr/Photos-Row-Link/raw/refs/heads/main/file_00000000798482079f843eb6f797f91d.png" alt="Loading..." class="pulse-logo">
+        <div class="pulse-logo-wrapper">
+            <img src="https://github.com/jakariya41jr/Photos-Row-Link/raw/refs/heads/main/file_00000000798482079f843eb6f797f91d.png" alt="Loading..." class="pulse-logo">
+        </div>
     </div>
 
-    <!-- Toast Notification Overlay -->
+    <!-- ==========================================================================
+         6. NETWORK TOAST POPUP NOTIFIER
+         ========================================================================== -->
     <div id="toast-box">
-        <i class="fas fa-wifi-slash"></i> ইন্টারনেট কানেকশন চেক করুন!
+        <i class="fas fa-wifi-slash"></i> <span id="toast-text">ইন্টারনেট কানেকশন চেক করুন!</span>
     </div>
 
-    <!-- Notice Marquee Ticker -->
+    <!-- ==========================================================================
+         7. ANNOUNCEMENT NOTICE MARQUEE TICKER
+         ========================================================================== -->
     <div class="notice-ticker" id="notice-wrapper">
         <i class="fas fa-bullhorn"></i>
-        <marquee scrollamount="5" id="notice-marquee">স্বাগতম JRS Store এ! নতুন রুট মডিউল ও অ্যাপস পেতে সাথেই থাকুন।</marquee>
+        <marquee scrollamount="5" id="notice-marquee">স্বাগতম JRS Store এ! নতুন রুট মডিউল ও মোড অ্যাপস পেতে সাথেই থাকুন।</marquee>
     </div>
 
-    <!-- Header Navigation -->
+    <!-- ==========================================================================
+         8. HEADER NAVIGATION BAR
+         ========================================================================== -->
     <header>
-        <a href="#" class="logo-area">
+        <a href="#" class="logo-area" onclick="location.reload(); return false;">
             <img src="https://github.com/jakariya41jr/Photos-Row-Link/raw/refs/heads/main/file_00000000798482079f843eb6f797f91d.png" alt="JRS Logo">
             <span id="nav-title">JRS Store</span>
         </a>
         <div class="header-actions">
-            <button class="icon-btn" id="theme-toggle-btn" title="Toggle Theme"><i class="fas fa-sun"></i></button>
-            <button class="icon-btn" id="menu-btn" title="Menu"><i class="fas fa-bars"></i></button>
+            <button class="icon-btn" id="theme-toggle-btn" title="Toggle Light/Dark Theme">
+                <i class="fas fa-sun"></i>
+            </button>
+            <button class="icon-btn" id="menu-btn" title="Open Navigation Menu">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
 
-    <!-- Header Dropdown Menu -->
+    <!-- Header Dropdown Navigation Menu -->
     <div class="dropdown-menu" id="dropdown-menu">
-        <a href="#" class="dropdown-item" onclick="switchTab('home-section');"><i class="fas fa-home"></i> Home</a>
-        <a href="#" class="dropdown-item" onclick="switchTab('apps-section');"><i class="fas fa-th-large"></i> All Apps</a>
-        <a href="#" class="dropdown-item" onclick="switchTab('articles-section');"><i class="fas fa-newspaper"></i> Articles & Blog</a>
-        <a href="#" class="dropdown-item" onclick="switchTab('tools-section');"><i class="fas fa-tools"></i> Tools & Modules</a>
+        <a href="#" class="dropdown-item" onclick="switchTab('home-section'); return false;">
+            <i class="fas fa-home"></i> Home Page
+        </a>
+        <a href="#" class="dropdown-item" onclick="switchTab('apps-section'); return false;">
+            <i class="fas fa-th-large"></i> All Android Apps
+        </a>
+        <a href="#" class="dropdown-item" onclick="switchTab('articles-section'); return false;">
+            <i class="fas fa-newspaper"></i> Articles & Blog
+        </a>
+        <a href="#" class="dropdown-item" onclick="switchTab('tools-section'); return false;">
+            <i class="fas fa-tools"></i> Tools & Modules
+        </a>
     </div>
 
-    <!-- Main Container -->
+    <!-- ==========================================================================
+         9. MAIN APPLICATION LAYOUT & CONTAINER
+         ========================================================================== -->
     <div class="container">
 
-        <!-- Live Search Input Box -->
+        <!-- Live Search Bar -->
         <div class="search-container">
             <i class="fas fa-search"></i>
             <input type="text" id="app-search" placeholder="Search for apps, tools, or games...">
         </div>
 
-        <!-- Banner Carousel (Height Compacted) -->
+        <!-- Ultra-Slim Compact Hero Banner Carousel (Height reduced to ~82px) -->
         <div class="banner-carousel" id="banner-carousel" style="display: none;"></div>
 
-        <!-- Sponsor Ads Container (Height Compacted) -->
+        <!-- Compact Sponsor Advertisement Banner Slot (Height reduced to max 80px) -->
         <div class="sponsor-ad-container" id="global-ad-slot">
             <span class="ad-label">Advertisement</span>
             <div id="ad-content-wrapper"></div>
         </div>
 
-        <!-- 1. HOME SECTION -->
+        <!-- 9.1 HOME SECTION -->
         <div id="home-section" class="page-section active-section">
             <div class="category-filter-bar" id="category-bar">
                 <div class="cat-chip active" onclick="filterCategory('All', this)">All</div>
             </div>
 
-            <div class="section-title"><i class="fas fa-fire-flame-curved"></i> Trending Apps (<span id="trending-count">0</span>)</div>
-            <div class="app-grid" id="trending-grid"><div class="loading-text">লোড হচ্ছে...</div></div>
+            <div class="section-title">
+                <i class="fas fa-fire-flame-curved"></i> Trending Apps (<span id="trending-count">0</span>)
+            </div>
+            <div class="app-grid" id="trending-grid">
+                <div class="loading-text"><i class="fas fa-spinner fa-spin"></i> লোড হচ্ছে...</div>
+            </div>
 
-            <div class="section-title"><i class="fas fa-cloud-arrow-down"></i> Latest Updates (<span id="latest-count">0</span>)</div>
-            <div class="app-grid" id="latest-grid"><div class="loading-text">লোড হচ্ছে...</div></div>
+            <div class="section-title">
+                <i class="fas fa-cloud-arrow-down"></i> Latest Updates (<span id="latest-count">0</span>)
+            </div>
+            <div class="app-grid" id="latest-grid">
+                <div class="loading-text"><i class="fas fa-spinner fa-spin"></i> লোড হচ্ছে...</div>
+            </div>
         </div>
 
-        <!-- 2. ALL APPS SECTION -->
+        <!-- 9.2 ALL APPS SECTION -->
         <div id="apps-section" class="page-section">
-            <div class="section-title"><i class="fas fa-th-large"></i> All Available Apps</div>
-            <div class="app-grid" id="all-apps-grid"><div class="loading-text">লোড হচ্ছে...</div></div>
+            <div class="section-title">
+                <i class="fas fa-th-large"></i> All Available Applications
+            </div>
+            <div class="app-grid" id="all-apps-grid">
+                <div class="loading-text"><i class="fas fa-spinner fa-spin"></i> লোড হচ্ছে...</div>
+            </div>
         </div>
 
-        <!-- 3. ARTICLES SECTION -->
+        <!-- 9.3 ARTICLES SECTION -->
         <div id="articles-section" class="page-section">
-            <div class="section-title"><i class="fas fa-newspaper"></i> Articles & Blog</div>
-            <div id="articles-container" class="tools-grid"><div class="loading-text">লোড হচ্ছে...</div></div>
+            <div class="section-title">
+                <i class="fas fa-newspaper"></i> Tech Articles & Updates
+            </div>
+            <div id="articles-container" class="tools-grid">
+                <div class="loading-text"><i class="fas fa-spinner fa-spin"></i> লোড হচ্ছে...</div>
+            </div>
         </div>
 
-        <!-- 4. TOOLS SECTION -->
+        <!-- 9.4 TOOLS & MODULES SECTION -->
         <div id="tools-section" class="page-section">
-            <div class="section-title"><i class="fas fa-tools"></i> Root Modules & Useful Web Tools</div>
-            <div id="tools-container" class="tools-grid"><div class="loading-text">লোড হচ্ছে...</div></div>
+            <div class="section-title">
+                <i class="fas fa-tools"></i> Root Modules & Useful Web Tools
+            </div>
+            <div id="tools-container" class="tools-grid">
+                <div class="loading-text"><i class="fas fa-spinner fa-spin"></i> লোড হচ্ছে...</div>
+            </div>
         </div>
 
-        <!-- Developer Credit Footer -->
+        <!-- Footer Developer Credits -->
         <div class="developer-credit">
-            Developed by Md Jakariya Hasan<br>
+            Developed with <i class="fas fa-heart" style="color: #e74c3c;"></i> by Md Jakariya Hasan<br>
             &copy; 2026 <span id="footer-title">JRS Store</span>. All Rights Reserved.
         </div>
     </div>
 
-    <!-- Bottom Navigation Bar -->
+    <!-- ==========================================================================
+         10. BOTTOM FLOATING NAVIGATION MENU
+         ========================================================================== -->
     <div class="bottom-nav">
         <button class="nav-item active" onclick="switchTab('home-section', this)">
             <i class="fas fa-home"></i><span>Home</span>
@@ -1050,10 +1286,13 @@
         </button>
     </div>
 
-    <!-- App Details Modal Window -->
+    <!-- ==========================================================================
+         11. APP DETAILS MODAL & DOWNLOAD DIALOG
+         ========================================================================== -->
     <div class="modal-overlay" id="app-modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeAppModal()"><i class="fas fa-times"></i></button>
+
             <div class="modal-header">
                 <img id="modal-img" src="" alt="App Icon">
                 <h2 class="modal-title" id="modal-title">App Name</h2>
@@ -1063,11 +1302,11 @@
                 <span class="badge category" id="modal-category"><i class="fas fa-tag"></i> Category</span>
                 <span class="badge" id="modal-version"><i class="fas fa-code-branch"></i> v1.0</span>
                 <span class="badge" id="modal-size"><i class="fas fa-weight-hanging"></i> Size</span>
-                <span class="badge safe"><i class="fas fa-shield-check"></i> 100% Safe & Verified</span>
+                <span class="badge safe"><i class="fas fa-shield-check"></i> 100% Safe</span>
             </div>
 
             <div class="modal-desc" id="modal-desc">
-                Description goes here...
+                বিস্তারিত বিবরণ লোড হচ্ছে...
             </div>
 
             <button class="download-btn" id="modal-download-btn" onclick="startDownload()">
@@ -1079,9 +1318,13 @@
         </div>
     </div>
 
-    <!-- Firebase Modular JavaScript & Platform Logic Implementation -->
+    <!-- ==========================================================================
+         12. FIREBASE REALTIME DATABASE & PLATFORM LOGIC (MODULAR ES6)
+         ========================================================================== -->
     <script type="module">
-        /* Import Firebase SDK Version 10.8.1 Modular Libraries */
+        /* --------------------------------------------------------------------------
+           12.1 IMPORT FIREBASE MODULES (SDK VERSION 10.8.1)
+           -------------------------------------------------------------------------- */
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import {
             getDatabase,
@@ -1092,7 +1335,9 @@
             runTransaction
         } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
-        /* Firebase API Credentials */
+        /* --------------------------------------------------------------------------
+           12.2 FIREBASE API CREDENTIALS CONFIGURATION
+           -------------------------------------------------------------------------- */
         const firebaseConfig = {
             apiKey: "AIzaSyCTV_PGdsnI2Tcbou3IJUU_r8ylwev9fU0",
             authDomain: "jrs-store.firebaseapp.com",
@@ -1104,22 +1349,26 @@
             measurementId: "G-QPNBEJHBSF"
         };
 
-        /* Initialize App & Database */
+        /* Initialize Firebase Engine */
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        /* Application Data State Keepers */
+        /* Global Application State Handlers */
         let allAppsData = [];
         let currentSelectedApp = null;
         let isFirstLoad = true;
         let selectedCategory = 'All';
 
-        /* ==========================================================================
-           1. THEME MANAGEMENT SYSTEM (DARK / LIGHT TOGGLE)
-           ========================================================================== */
+        /* --------------------------------------------------------------------------
+           12.3 THEME MANAGEMENT SYSTEM (LIGHT / DARK TOGGLE)
+           -------------------------------------------------------------------------- */
         const themeBtn = document.getElementById('theme-toggle-btn');
         const themeIcon = themeBtn.querySelector('i');
 
+        /**
+         * Applies the selected color theme to the HTML DOM
+         * @param {string} theme - 'dark' or 'light'
+         */
         function applyTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
             localStorage.setItem('jrs_theme', theme);
@@ -1130,21 +1379,23 @@
             }
         }
 
+        /* Retrieve Saved Local Preference or Default to Dark */
         const savedTheme = localStorage.getItem('jrs_theme') || 'dark';
         applyTheme(savedTheme);
 
+        /* Theme Toggle Event Listener */
         themeBtn.addEventListener('click', () => {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
             applyTheme(targetTheme);
         });
 
-        /* ==========================================================================
-           2. PULL TO REFRESH GESTURE HANDLER
-           ========================================================================== */
+        /* --------------------------------------------------------------------------
+           12.4 PULL TO REFRESH GESTURE LOGIC
+           -------------------------------------------------------------------------- */
         let pStart = { x: 0, y: 0 };
         const ptrIndicator = document.getElementById('ptr-indicator');
-        const ptrText = ptrIndicator.querySelector('span');
+        const ptrText = document.getElementById('ptr-text');
         const ptrIcon = ptrIndicator.querySelector('i');
         let isRefreshing = false;
 
@@ -1160,10 +1411,10 @@
                 let diff = y - pStart.y;
 
                 if (diff > 0) {
-                    let transformVal = Math.min(diff / 2, 80);
-                    ptrIndicator.style.transform = `translateY(${transformVal - 60}px)`;
+                    let transformVal = Math.min(diff / 2.2, 75);
+                    ptrIndicator.style.transform = `translateY(${transformVal - 55}px)`;
 
-                    if (transformVal >= 60) {
+                    if (transformVal >= 55) {
                         ptrText.innerText = "ছেড়ে দিন রিফ্রেশ করতে";
                         ptrIcon.className = "fas fa-arrow-up";
                     } else {
@@ -1180,24 +1431,24 @@
             let y = e.changedTouches[0].screenY;
             let diff = y - pStart.y;
 
-            if (diff > 120 && window.scrollY === 0) {
+            if (diff > 110 && window.scrollY === 0) {
                 isRefreshing = true;
-                ptrIndicator.style.transform = `translateY(15px)`;
+                ptrIndicator.style.transform = `translateY(12px)`;
                 ptrText.innerText = "আপডেট হচ্ছে...";
                 ptrIcon.className = "fas fa-spinner fa-spin";
 
                 setTimeout(() => {
                     location.reload();
-                }, 800);
+                }, 750);
             } else {
                 ptrIndicator.style.transform = `translateY(-100%)`;
             }
             pStart.y = 0;
         });
 
-        /* ==========================================================================
-           3. FIREBASE SITE SETTINGS & MAINTENANCE LISTENER
-           ========================================================================== */
+        /* --------------------------------------------------------------------------
+           12.5 SITE SETTINGS & MAINTENANCE CONTROLLER
+           -------------------------------------------------------------------------- */
         onValue(ref(db, 'site_settings'), (snap) => {
             const settings = snap.val() || {};
             const maintScreen = document.getElementById('maintenance-screen');
@@ -1205,7 +1456,7 @@
             if (settings.title) {
                 document.getElementById('nav-title').innerText = settings.title;
                 document.getElementById('footer-title').innerText = settings.title;
-                document.title = settings.title;
+                document.title = settings.title + " - App Platform";
             }
 
             if (settings.maintenance === true) {
@@ -1218,9 +1469,9 @@
             }
         });
 
-        /* ==========================================================================
-           4. ADSETTINGS & MONETIZATION INJECTOR
-           ========================================================================== */
+        /* --------------------------------------------------------------------------
+           12.6 SPONSOR AD & MONETIZATION MANAGER
+           -------------------------------------------------------------------------- */
         let directAdLink = "";
         let adsEnabled = false;
 
@@ -1239,18 +1490,21 @@
                 const targetUrl = data.banner_url || data.banner_target;
 
                 if (imgUrl) {
-                    adContentHTML += `<a href="${targetUrl || '#'}" target="_blank" rel="noopener" style="display:block; margin-bottom:8px;"><img src="${imgUrl}" alt="Sponsor"></a>`;
+                    adContentHTML += `
+                        <a href="${targetUrl || '#'}" target="_blank" rel="noopener" style="display:block;">
+                            <img src="${imgUrl}" alt="Sponsor Banner">
+                        </a>`;
                 }
 
                 const customScript = data.banner_html || data.custom_script;
                 if (customScript) {
-                    adContentHTML += `<div>${customScript}</div>`;
+                    adContentHTML += `<div style="margin-top:4px;">${customScript}</div>`;
                 }
 
                 if (adContentHTML !== "") {
                     adWrapper.innerHTML = adContentHTML;
 
-                    /* Execute Dynamic Embedded Script Tags Safely */
+                    /* Execute Embedded Script Tags Safely */
                     Array.from(adWrapper.querySelectorAll('script')).forEach(oldScript => {
                         const newScript = document.createElement('script');
                         Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
@@ -1269,9 +1523,9 @@
             }
         });
 
-        /* ==========================================================================
-           5. NAVIGATION DROPDOWN TOGGLER
-           ========================================================================== */
+        /* --------------------------------------------------------------------------
+           12.7 NAVIGATION MENU TOGGLER
+           -------------------------------------------------------------------------- */
         const menuBtn = document.getElementById('menu-btn');
         const dropdownMenu = document.getElementById('dropdown-menu');
 
@@ -1284,9 +1538,9 @@
             dropdownMenu.classList.remove('active');
         });
 
-        /* ==========================================================================
-           6. TAB SWITCHER FUNCTION
-           ========================================================================== */
+        /* --------------------------------------------------------------------------
+           12.8 SECTION TAB SWITCHER
+           -------------------------------------------------------------------------- */
         window.switchTab = function(sectionId, btnElement) {
             document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active-section'));
             document.getElementById(sectionId).classList.add('active-section');
@@ -1303,12 +1557,12 @@
                 if (correspondingBtn) correspondingBtn.classList.add('active');
             }
             dropdownMenu.classList.remove('active');
-            window.scrollTo(0, 0);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         };
 
-        /* ==========================================================================
-           7. COMPACT HERO BANNER CAROUSEL LISTENER
-           ========================================================================== */
+        /* --------------------------------------------------------------------------
+           12.9 COMPACT HERO BANNER CAROUSEL LISTENER (~82px SLIM HEIGHT)
+           -------------------------------------------------------------------------- */
         onValue(ref(db, 'banners'), (snap) => {
             const data = snap.val();
             const carousel = document.getElementById('banner-carousel');
@@ -1318,7 +1572,7 @@
                     let b = data[k];
                     html += `
                         <div class="banner-item" onclick="window.open('${b.target_url}', '_blank')">
-                            <img src="${b.image_url}" onerror="this.src='https://via.placeholder.com/300x105'">
+                            <img src="${b.image_url}" alt="${b.title || 'Banner'}" onerror="this.src='https://via.placeholder.com/300x82'">
                             <div class="banner-overlay">
                                 <h4>${b.title}</h4>
                             </div>
@@ -1331,9 +1585,9 @@
             }
         });
 
-        /* ==========================================================================
-           8. CATEGORIES CHIP BAR LISTENER
-           ========================================================================== */
+        /* --------------------------------------------------------------------------
+           12.10 CATEGORY FILTER BAR LISTENER
+           -------------------------------------------------------------------------- */
         const catRef = ref(db, 'categories');
         onValue(catRef, (snapshot) => {
             const data = snapshot.val();
@@ -1346,9 +1600,9 @@
             }
         });
 
-        /* ==========================================================================
-           9. REALTIME APPS DATABASE LISTENER & RENDERER
-           ========================================================================== */
+        /* --------------------------------------------------------------------------
+           12.11 APPS DATABASE REALTIME LISTENER & RENDER ENGINES
+           -------------------------------------------------------------------------- */
         const updatesRef = ref(db, 'latest_updates');
         onValue(updatesRef, (snapshot) => {
             const data = snapshot.val();
@@ -1362,17 +1616,18 @@
                 document.getElementById('all-apps-grid').innerHTML = '<div class="loading-text">কোনো অ্যাপ পাওয়া যায়নি।</div>';
             }
             if (isFirstLoad) {
-                document.getElementById('global-loader').style.opacity = '0';
+                const loader = document.getElementById('global-loader');
+                loader.style.opacity = '0';
                 setTimeout(() => {
-                    document.getElementById('global-loader').style.display = 'none';
+                    loader.style.display = 'none';
                 }, 500);
                 isFirstLoad = false;
             }
         });
 
-        /* Live Search Input Event Listener */
+        /* Search Filter Listener */
         document.getElementById('app-search').addEventListener('input', function(e) {
-            const query = e.target.value.toLowerCase();
+            const query = e.target.value.toLowerCase().trim();
             const filteredApps = allAppsData.filter(app =>
                 app.title.toLowerCase().includes(query) ||
                 (app.category && app.category.toLowerCase().includes(query)) ||
@@ -1384,7 +1639,7 @@
             renderAllAppsPage(filteredApps);
         });
 
-        /* Category Filter Trigger Function */
+        /* Filter Category Trigger Function */
         window.filterCategory = function(category, element) {
             selectedCategory = category;
             document.querySelectorAll('.cat-chip').forEach(el => el.classList.remove('active'));
@@ -1393,7 +1648,7 @@
             renderApps(filtered);
         };
 
-        /* Render Home Page App Cards */
+        /* Render Apps to Home Grid */
         function renderApps(appsArray) {
             const trendingGrid = document.getElementById('trending-grid');
             const latestGrid = document.getElementById('latest-grid');
@@ -1411,9 +1666,9 @@
                 let downloadsText = item.downloads >= 1000 ? (item.downloads / 1000).toFixed(1) + 'K' : (item.downloads || 0);
                 trendingGrid.innerHTML += `
                     <div class="app-card" onclick="openAppModal('${item.id}')">
-                        <div class="app-icon"><img src="${item.image_url}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/55'"></div>
+                        <div class="app-icon"><img src="${item.image_url}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/52'"></div>
                         <div class="app-title">${item.title}</div>
-                        <div class="card-stars"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></div>
+                        <div class="card-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         <div class="download-badge"><i class="fas fa-download"></i> ${downloadsText}</div>
                     </div>`;
             });
@@ -1421,15 +1676,15 @@
             [...appsArray].reverse().forEach(item => {
                 latestGrid.innerHTML += `
                     <div class="app-card" onclick="openAppModal('${item.id}')">
-                        <div class="app-icon"><img src="${item.image_url}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/55'"></div>
+                        <div class="app-icon"><img src="${item.image_url}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/52'"></div>
                         <div class="app-title">${item.title}</div>
-                        <div class="card-stars"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></div>
+                        <div class="card-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         <div class="mod-badge">${item.version || 'v1.0'}</div>
                     </div>`;
             });
         }
 
-        /* Render All Apps Page Grid */
+        /* Render All Apps Section Grid */
         function renderAllAppsPage(appsArray) {
             const allAppsGrid = document.getElementById('all-apps-grid');
             allAppsGrid.innerHTML = '';
@@ -1440,17 +1695,17 @@
             appsArray.forEach(item => {
                 allAppsGrid.innerHTML += `
                     <div class="app-card" onclick="openAppModal('${item.id}')">
-                        <div class="app-icon"><img src="${item.image_url}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/55'"></div>
+                        <div class="app-icon"><img src="${item.image_url}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/52'"></div>
                         <div class="app-title">${item.title}</div>
-                        <div class="card-stars"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></div>
+                        <div class="card-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         <div class="mod-badge">${item.category || 'App'}</div>
                     </div>`;
             });
         }
 
-        /* ==========================================================================
-           10. APP DETAILS MODAL VIEW & DOWNLOAD HANDLER
-           ========================================================================== */
+        /* --------------------------------------------------------------------------
+           12.12 APP DETAILS MODAL HANDLER
+           -------------------------------------------------------------------------- */
         window.openAppModal = function(appId) {
             const app = allAppsData.find(a => a.id === appId);
             if (!app) return;
@@ -1461,7 +1716,7 @@
             document.getElementById('modal-category').innerHTML = `<i class="fas fa-tag"></i> ${app.category || 'App'}`;
             document.getElementById('modal-version').innerHTML = `<i class="fas fa-code-branch"></i> ${app.version || 'v1.0'}`;
             document.getElementById('modal-size').innerHTML = `<i class="fas fa-weight-hanging"></i> ${app.size || 'Unknown'}`;
-            document.getElementById('modal-desc').innerHTML = app.description || "এই অ্যাপটির বিস্তারিত বিবরণ দেওয়া নেই। তবে এটি 100% সুরক্ষিত।";
+            document.getElementById('modal-desc').innerHTML = app.description || "এই অ্যাপটির বিস্তারিত বিবরণ দেওয়া নেই। তবে এটি 100% ভাইরাস-মুক্ত ও সুরক্ষিত।";
 
             const dlBtn = document.getElementById('modal-download-btn');
             dlBtn.innerHTML = '<i class="fas fa-download"></i> Download Now';
@@ -1475,12 +1730,12 @@
                 suggestions.forEach(item => {
                     suggestedGrid.innerHTML += `
                         <div class="suggested-card" onclick="openAppModal('${item.id}')">
-                            <img src="${item.image_url}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/40'">
+                            <img src="${item.image_url}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/38'">
                             <div class="title">${item.title}</div>
                         </div>`;
                 });
             } else {
-                suggestedGrid.innerHTML = '<p style="font-size:11px; color:var(--text-muted); width: 100%; text-align: left;">No similar apps found.</p>';
+                suggestedGrid.innerHTML = '<p style="font-size:10px; color:var(--text-muted); width:100%; text-align:left;">No similar apps found.</p>';
             }
 
             document.getElementById('app-modal').classList.add('active');
@@ -1496,15 +1751,15 @@
             }
         });
 
-        /* Download Execution Logic */
+        /* Download Trigger Logic */
         window.startDownload = function() {
             if (!currentSelectedApp) return;
 
             const btn = document.getElementById('modal-download-btn');
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Downloading...';
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
             btn.disabled = true;
 
-            /* Increment Download Counter in Realtime Database */
+            /* Increment Download Counter in Database */
             const downloadRef = ref(db, `latest_updates/${currentSelectedApp.id}/downloads`);
             runTransaction(downloadRef, (current) => (current || 0) + 1);
 
@@ -1524,13 +1779,13 @@
                 btn.innerHTML = '<i class="fas fa-check-circle"></i> Download Started';
                 setTimeout(() => {
                     closeAppModal();
-                }, 1500);
-            }, 1000);
+                }, 1400);
+            }, 900);
         };
 
-        /* ==========================================================================
-           11. TOOLS & ROOT MODULES DATABASE LISTENER
-           ========================================================================== */
+        /* --------------------------------------------------------------------------
+           12.13 TOOLS & ROOT MODULES DATABASE LISTENER
+           -------------------------------------------------------------------------- */
         onValue(ref(db, 'tools_modules'), (snapshot) => {
             const data = snapshot.val();
             const container = document.getElementById('tools-container');
@@ -1539,7 +1794,7 @@
                 Object.values(data).forEach(item => {
                     container.innerHTML += `
                         <div class="tool-card">
-                            <img src="${item.image_url}" class="tool-img" alt="${item.title}" onerror="this.src='https://via.placeholder.com/60'">
+                            <img src="${item.image_url}" class="tool-img" alt="${item.title}" onerror="this.src='https://via.placeholder.com/55'">
                             <div class="tool-info">
                                 <h3>${item.title}</h3>
                                 <p>${item.description}</p>
@@ -1552,9 +1807,9 @@
             }
         });
 
-        /* ==========================================================================
-           12. ARTICLES & SITE UPDATES DATABASE LISTENER
-           ========================================================================== */
+        /* --------------------------------------------------------------------------
+           12.14 ARTICLES DATABASE LISTENER
+           -------------------------------------------------------------------------- */
         onValue(ref(db, 'site_updates'), (snapshot) => {
             const data = snapshot.val();
             const container = document.getElementById('articles-container');
@@ -1566,7 +1821,7 @@
                             <div class="tool-info">
                                 <h3>${item.title}</h3>
                                 <p>${item.description}</p>
-                                ${item.link ? `<a href="${item.link}" target="_blank" class="tool-link-btn" style="margin-top: 4px;"><i class="fas fa-arrow-right"></i> Read More</a>` : ''}
+                                ${item.link ? `<a href="${item.link}" target="_blank" class="tool-link-btn" style="margin-top:4px;"><i class="fas fa-arrow-right"></i> Read Article</a>` : ''}
                             </div>
                         </div>`;
                 });
@@ -1575,9 +1830,9 @@
             }
         });
 
-        /* ==========================================================================
-           13. MARQUEE NOTICES DATABASE LISTENER
-           ========================================================================== */
+        /* --------------------------------------------------------------------------
+           12.15 MARQUEE NOTICES DATABASE LISTENER
+           -------------------------------------------------------------------------- */
         onValue(ref(db, 'notices'), (snapshot) => {
             const data = snapshot.val();
             const marquee = document.getElementById('notice-marquee');
@@ -1592,27 +1847,29 @@
             }
         });
 
-        /* ==========================================================================
-           14. OFFLINE / ONLINE CONNECTION TOAST NOTIFIER
-           ========================================================================== */
+        /* --------------------------------------------------------------------------
+           12.16 NETWORK CONNECTION TOAST NOTIFIER
+           -------------------------------------------------------------------------- */
         function showToastMessage(msg, isOnline) {
             const toast = document.getElementById('toast-box');
-            toast.innerHTML = isOnline ? `<i class="fas fa-wifi"></i> ${msg}` : `<i class="fas fa-wifi-slash"></i> ${msg}`;
+            document.getElementById('toast-text').innerText = msg;
 
             if (isOnline) {
                 toast.classList.add('online');
+                toast.querySelector('i').className = 'fas fa-wifi';
             } else {
                 toast.classList.remove('online');
+                toast.querySelector('i').className = 'fas fa-wifi-slash';
             }
 
             toast.classList.add('show');
             setTimeout(() => {
                 toast.classList.remove('show');
-            }, 4000);
+            }, 3800);
         }
 
         window.addEventListener('offline', () => {
-            showToastMessage('ইন্টারনেট কানেকশন চেক করুন!', false);
+            showToastMessage('ইন্টারনেট কানেকশন বিচ্ছিন্ন হয়েছে!', false);
         });
 
         window.addEventListener('online', () => {
