@@ -60,6 +60,7 @@
             --radius-sm: 8px;
             --radius-md: 12px;
             --radius-lg: 16px;
+            --radius-xl: 22px;
             --radius-pill: 30px;
             --transition-speed: 0.3s;
         }
@@ -353,13 +354,13 @@
            2.5 LIVE SEARCH FIELD
            -------------------------------------------------------------------------- */
         .search-container {
-            margin-bottom: 14px;
+            margin-bottom: 16px;
             position: relative;
         }
 
         .search-container input {
             width: 100%;
-            padding: 10px 14px 10px 40px;
+            padding: 12px 16px 12px 42px;
             border-radius: var(--radius-pill);
             border: 1px solid var(--border-color);
             background: var(--card-bg);
@@ -373,29 +374,29 @@
 
         .search-container input:focus {
             border-color: var(--accent-color);
-            box-shadow: 0 0 12px rgba(0, 242, 254, 0.25);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
         }
 
         .search-container i {
             position: absolute;
-            left: 15px;
+            left: 16px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-muted);
-            font-size: 14px;
+            font-size: 15px;
         }
 
         /* --------------------------------------------------------------------------
-           2.6 MODERN HERO BANNER CAROUSEL (OPTIMIZED HEIGHT & FIT)
+           2.6 MODERN HERO BANNER CAROUSEL (ENHANCED DUAL-LAYER AMBIENT GLASS)
            -------------------------------------------------------------------------- */
         .banner-carousel {
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             display: flex;
-            gap: 12px;
+            gap: 14px;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             scrollbar-width: none;
-            padding: 2px 2px 6px 2px;
+            padding: 4px 2px 10px 2px;
         }
 
         .banner-carousel::-webkit-scrollbar {
@@ -403,98 +404,154 @@
         }
 
         .banner-item {
-            flex: 0 0 92%;
+            flex: 0 0 95%;
             scroll-snap-align: center;
-            border-radius: var(--radius-lg);
+            border-radius: var(--radius-xl);
             overflow: hidden;
             position: relative;
-            height: 120px; /* Perfect height to prevent cropping */
+            height: 160px; /* Enhanced view height */
             border: 1px solid var(--border-color);
             cursor: pointer;
-            box-shadow: 0 6px 16px var(--shadow-color);
-            background: linear-gradient(135deg, #131326 0%, #0d0d18 100%);
-            transition: transform var(--transition-speed) ease, border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            box-shadow: 0 10px 28px var(--shadow-color);
+            background: rgba(18, 18, 34, 0.85);
+            backdrop-filter: blur(16px);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
         .banner-item:hover {
             border-color: var(--accent-color);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 242, 254, 0.2);
+            transform: translateY(-3px) scale(1.005);
+            box-shadow: 0 14px 35px rgba(0, 242, 254, 0.25);
         }
 
-        .banner-item img {
+        /* Ambient Blurred Background Layer to eliminate empty black bars */
+        .banner-bg-blur {
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            object-fit: cover;
+            filter: blur(20px) brightness(0.4) saturate(1.4);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Sharp Foreground Banner Image */
+        .banner-img-main {
+            position: relative;
+            z-index: 2;
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Prevents text and logos from being cropped */
+            object-fit: cover;
             object-position: center;
-            background: #080811;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        .banner-item:hover img {
-            transform: scale(1.02);
+        .banner-item:hover .banner-img-main {
+            transform: scale(1.04);
         }
 
-        .banner-item .banner-overlay {
+        .banner-overlay {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(11, 11, 20, 0.9) 100%);
-            padding: 8px 12px;
+            z-index: 3;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(11, 11, 20, 0.95) 100%);
+            padding: 12px 16px;
             display: flex;
-            align-items: flex-end;
+            flex-direction: column;
+            justify-content: flex-end;
+            gap: 2px;
         }
 
-        .banner-item h4 {
-            font-size: 13px;
+        .banner-overlay h4 {
+            font-size: 14px;
             color: #ffffff;
-            font-weight: 700;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+            font-weight: 800;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.9);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            letter-spacing: 0.3px;
         }
 
-        /* --------------------------------------------------------------------------
-           2.7 ELEGANT SPONSOR AD CONTAINER
-           -------------------------------------------------------------------------- */
-        .sponsor-ad-container {
-            width: 100%;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            margin-bottom: 16px;
-            display: none;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            text-align: center;
-            padding: 8px 10px;
-            box-shadow: 0 6px 16px var(--shadow-color);
-            position: relative;
-            backdrop-filter: blur(8px);
-        }
-
-        .sponsor-ad-container span.ad-label {
-            display: inline-block;
+        .banner-tag {
+            align-self: flex-start;
             font-size: 9px;
             font-weight: 800;
             color: var(--accent-color);
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            background: rgba(0, 242, 254, 0.08);
+            background: rgba(0, 242, 254, 0.15);
+            border: 1px solid rgba(0, 242, 254, 0.3);
             padding: 2px 8px;
-            border-radius: 6px;
-            border: 1px solid rgba(0, 242, 254, 0.2);
+            border-radius: var(--radius-pill);
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            margin-bottom: 2px;
+            backdrop-filter: blur(6px);
+        }
+
+        /* --------------------------------------------------------------------------
+           2.7 ELEGANT SPONSOR AD CONTAINER (REDESIGNED FULL-BLEED CARD)
+           -------------------------------------------------------------------------- */
+        .sponsor-ad-container {
+            width: 100%;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            margin-bottom: 20px;
+            display: none;
+            background: linear-gradient(145deg, var(--card-bg) 0%, rgba(20, 20, 38, 0.9) 100%);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            padding: 10px 12px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            position: relative;
+            backdrop-filter: blur(12px);
+            transition: all 0.35s ease;
+        }
+
+        .sponsor-ad-container:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 12px 35px rgba(0, 242, 254, 0.2);
+        }
+
+        .sponsor-ad-container span.ad-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 9px;
+            font-weight: 800;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.9px;
+            background: rgba(0, 242, 254, 0.1);
+            padding: 3px 10px;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(0, 242, 254, 0.25);
+            box-shadow: 0 2px 8px rgba(0, 242, 254, 0.1);
+        }
+
+        .sponsor-ad-container #ad-content-wrapper {
+            width: 100%;
+            border-radius: var(--radius-md);
+            overflow: hidden;
         }
 
         .sponsor-ad-container img {
-            max-height: 100px;
             width: 100%;
-            object-fit: contain;
-            border-radius: var(--radius-sm);
+            max-height: 140px;
+            object-fit: cover;
+            border-radius: var(--radius-md);
             display: block;
             margin: 0 auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+            transition: transform 0.4s ease;
+        }
+
+        .sponsor-ad-container a:hover img {
+            transform: scale(1.02);
         }
 
         /* --------------------------------------------------------------------------
@@ -504,8 +561,8 @@
             display: flex;
             gap: 8px;
             overflow-x: auto;
-            padding-bottom: 6px;
-            margin-bottom: 14px;
+            padding-bottom: 8px;
+            margin-bottom: 16px;
             scrollbar-width: none;
         }
 
@@ -517,9 +574,9 @@
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             color: var(--text-muted);
-            padding: 6px 14px;
+            padding: 7px 16px;
             border-radius: var(--radius-pill);
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
             cursor: pointer;
             white-space: nowrap;
@@ -532,13 +589,13 @@
             background: var(--accent-gradient);
             color: #0b0b14;
             border-color: transparent;
-            box-shadow: 0 3px 10px rgba(0, 242, 254, 0.3);
+            box-shadow: 0 4px 14px rgba(0, 242, 254, 0.35);
             font-weight: 800;
         }
 
         .section-title {
-            font-size: 14px;
-            margin: 18px 0 10px 0;
+            font-size: 15px;
+            margin: 20px 0 12px 0;
             color: var(--accent-color);
             display: flex;
             align-items: center;
@@ -548,7 +605,7 @@
         }
 
         .section-title i {
-            font-size: 13px;
+            font-size: 14px;
         }
 
         /* --------------------------------------------------------------------------
@@ -566,7 +623,7 @@
         @keyframes sectionFadeIn {
             from {
                 opacity: 0;
-                transform: translateY(6px);
+                transform: translateY(8px);
             }
             to {
                 opacity: 1;
@@ -577,41 +634,41 @@
         .app-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
-            gap: 10px;
+            gap: 12px;
         }
 
         .app-card {
             background: var(--card-bg);
             border-radius: var(--radius-md);
-            padding: 10px 8px;
+            padding: 12px 8px;
             text-align: center;
             color: var(--text-main);
-            box-shadow: 0 4px 10px var(--shadow-color);
+            box-shadow: 0 4px 12px var(--shadow-color);
             border: 1px solid var(--border-color);
-            transition: all var(--transition-speed) ease;
+            transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             position: relative;
             overflow: hidden;
         }
 
         .app-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-4px);
             border-color: var(--accent-color);
             box-shadow: var(--glow-shadow);
         }
 
         .app-icon img {
-            width: 52px;
-            height: 52px;
+            width: 54px;
+            height: 54px;
             border-radius: var(--radius-md);
             object-fit: cover;
-            margin-bottom: 6px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+            margin-bottom: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.35);
             transition: transform var(--transition-speed) ease;
         }
 
         .app-card:hover .app-icon img {
-            transform: scale(1.05);
+            transform: scale(1.06);
         }
 
         .app-title {
@@ -656,28 +713,29 @@
         .tools-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 10px;
+            gap: 12px;
         }
 
         .tool-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            box-shadow: 0 4px 10px var(--shadow-color);
+            box-shadow: 0 4px 12px var(--shadow-color);
             border-radius: var(--radius-md);
-            padding: 10px;
+            padding: 12px;
             display: flex;
-            gap: 10px;
+            gap: 12px;
             align-items: center;
-            transition: border-color var(--transition-speed) ease;
+            transition: border-color var(--transition-speed) ease, transform var(--transition-speed) ease;
         }
 
         .tool-card:hover {
             border-color: var(--accent-color);
+            transform: translateY(-2px);
         }
 
         .tool-img {
-            width: 55px;
-            height: 55px;
+            width: 58px;
+            height: 58px;
             border-radius: var(--radius-sm);
             object-fit: cover;
             flex-shrink: 0;
@@ -690,24 +748,24 @@
         .tool-info h3 {
             font-size: 13px;
             color: var(--accent-color);
-            margin-bottom: 3px;
+            margin-bottom: 4px;
             font-weight: 700;
         }
 
         .tool-info p {
             font-size: 11px;
             color: var(--text-muted);
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             line-height: 1.4;
         }
 
         .tool-link-btn {
             background: var(--accent-gradient);
             color: #0b0b14;
-            padding: 4px 10px;
+            padding: 5px 12px;
             font-size: 10px;
             font-weight: 800;
-            border-radius: 4px;
+            border-radius: 6px;
             text-decoration: none;
             display: inline-block;
             transition: opacity var(--transition-speed) ease;
@@ -753,7 +811,7 @@
         }
 
         .dropdown-item {
-            padding: 10px 14px;
+            padding: 12px 16px;
             color: var(--text-main);
             text-decoration: none;
             display: flex;
@@ -776,12 +834,12 @@
 
         .developer-credit {
             text-align: center;
-            margin-top: 25px;
-            padding: 14px;
+            margin-top: 30px;
+            padding: 16px;
             font-size: 11px;
             color: var(--text-muted);
             border-top: 1px solid var(--border-color);
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         /* --------------------------------------------------------------------------
@@ -795,7 +853,7 @@
             background: var(--header-bg);
             width: 92%;
             max-width: 400px;
-            height: 56px;
+            height: 58px;
             border-radius: var(--radius-pill);
             display: flex;
             justify-content: space-around;
@@ -831,12 +889,12 @@
         .nav-item.active {
             background: var(--accent-gradient);
             color: #0b0b14;
-            padding: 6px 12px;
+            padding: 6px 14px;
             border-radius: 20px;
             flex-direction: row;
             gap: 6px;
             font-weight: 800;
-            box-shadow: 0 3px 10px rgba(0, 242, 254, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 242, 254, 0.35);
         }
 
         .nav-item.active i {
@@ -846,7 +904,7 @@
         .loading-text {
             text-align: center;
             color: var(--text-muted);
-            padding: 16px;
+            padding: 18px;
             font-size: 12px;
             grid-column: 1 / -1;
         }
@@ -860,12 +918,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.75);
+            background: rgba(0, 0, 0, 0.78);
             z-index: 2000;
             display: none;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(6px);
+            backdrop-filter: blur(8px);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -880,7 +938,7 @@
             width: 90%;
             max-width: 380px;
             border-radius: var(--radius-lg);
-            padding: 18px;
+            padding: 20px;
             border: 1px solid var(--border-color);
             position: relative;
             max-height: 85vh;
@@ -888,7 +946,7 @@
             text-align: center;
             transform: scale(0.92);
             transition: transform 0.3s ease;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
             scrollbar-width: none;
         }
 
@@ -987,7 +1045,7 @@
             margin-bottom: 14px;
             text-align: left;
             background: var(--modal-bg);
-            padding: 10px 12px;
+            padding: 12px;
             border-radius: var(--radius-sm);
             border: 1px solid var(--border-color);
             line-height: 1.5;
@@ -1010,7 +1068,7 @@
             background: var(--accent-gradient);
             color: #0b0b14;
             width: 100%;
-            padding: 11px;
+            padding: 12px;
             border: none;
             border-radius: var(--radius-sm);
             font-size: 13px;
@@ -1212,10 +1270,10 @@
             <input type="text" id="app-search" placeholder="Search for apps, tools, or games...">
         </div>
 
-        <!-- Sleek Banner Carousel (Height & image fit updated) -->
+        <!-- Enhanced Hero Banner Carousel (With Dual-layer background blur) -->
         <div class="banner-carousel" id="banner-carousel" style="display: none;"></div>
 
-        <!-- Modern Sponsor Advertisement Banner Slot -->
+        <!-- Modern Sponsor Advertisement Banner Slot (Full Card Overlay) -->
         <div class="sponsor-ad-container" id="global-ad-slot">
             <span class="ad-label"><i class="fas fa-ad"></i> Advertisement</span>
             <div id="ad-content-wrapper"></div>
@@ -1580,7 +1638,7 @@
         };
 
         /* --------------------------------------------------------------------------
-           12.9 COMPACT HERO BANNER CAROUSEL LISTENER (HEIGHT & FIT ENHANCED)
+           12.9 COMPACT HERO BANNER CAROUSEL LISTENER (REDESIGNED WITH AMBIENT GLASS)
            -------------------------------------------------------------------------- */
         onValue(ref(db, 'banners'), (snap) => {
             const data = snap.val();
@@ -1591,8 +1649,10 @@
                     let b = data[k];
                     html += `
                         <div class="banner-item" onclick="window.open('${b.target_url}', '_blank')">
-                            <img src="${b.image_url}" alt="${b.title || 'Banner'}" onerror="this.src='https://via.placeholder.com/350x120'">
+                            <img class="banner-bg-blur" src="${b.image_url}" alt="" onerror="this.style.display='none'">
+                            <img class="banner-img-main" src="${b.image_url}" alt="${b.title || 'Banner'}" onerror="this.src='https://via.placeholder.com/350x160'">
                             <div class="banner-overlay">
+                                <span class="banner-tag"><i class="fas fa-star"></i> Featured</span>
                                 <h4>${b.title}</h4>
                             </div>
                         </div>`;
@@ -1685,7 +1745,7 @@
                 let downloadsText = item.downloads >= 1000 ? (item.downloads / 1000).toFixed(1) + 'K' : (item.downloads || 0);
                 trendingGrid.innerHTML += `
                     <div class="app-card" onclick="openAppModal('${item.id}')">
-                        <div class="app-icon"><img src="${item.image_url}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/52'"></div>
+                        <div class="app-icon"><img src="${item.image_url}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/54'"></div>
                         <div class="app-title">${item.title}</div>
                         <div class="card-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         <div class="download-badge"><i class="fas fa-download"></i> ${downloadsText}</div>
@@ -1695,7 +1755,7 @@
             [...appsArray].reverse().forEach(item => {
                 latestGrid.innerHTML += `
                     <div class="app-card" onclick="openAppModal('${item.id}')">
-                        <div class="app-icon"><img src="${item.image_url}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/52'"></div>
+                        <div class="app-icon"><img src="${item.image_url}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/54'"></div>
                         <div class="app-title">${item.title}</div>
                         <div class="card-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         <div class="mod-badge">${item.version || 'v1.0'}</div>
@@ -1714,7 +1774,7 @@
             appsArray.forEach(item => {
                 allAppsGrid.innerHTML += `
                     <div class="app-card" onclick="openAppModal('${item.id}')">
-                        <div class="app-icon"><img src="${item.image_url}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/52'"></div>
+                        <div class="app-icon"><img src="${item.image_url}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/54'"></div>
                         <div class="app-title">${item.title}</div>
                         <div class="card-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         <div class="mod-badge">${item.category || 'App'}</div>
@@ -1843,7 +1903,7 @@
                 Object.values(data).forEach(item => {
                     container.innerHTML += `
                         <div class="tool-card">
-                            <img src="${item.image_url}" class="tool-img" alt="${item.title}" onerror="this.src='https://via.placeholder.com/55'">
+                            <img src="${item.image_url}" class="tool-img" alt="${item.title}" onerror="this.src='https://via.placeholder.com/58'">
                             <div class="tool-info">
                                 <h3>${item.title}</h3>
                                 <p>${item.description}</p>
