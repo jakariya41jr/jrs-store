@@ -40,7 +40,7 @@
             --card-bg: #141424;
             --card-hover-bg: #1c1c32;
             --border-color: #24243e;
-            --border-glow: rgba(0, 242, 254, 0.25);
+            --border-glow: rgba(0, 242, 254, 0.35);
             --text-main: #ffffff;
             --text-muted: #8e8ea8;
             --modal-bg: #121222;
@@ -53,8 +53,8 @@
             --green-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
 
             /* Shadow Definitions */
-            --shadow-color: rgba(0, 0, 0, 0.4);
-            --glow-shadow: 0 0 15px rgba(0, 242, 254, 0.15);
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --glow-shadow: 0 0 18px rgba(0, 242, 254, 0.25);
 
             /* Layout Constants */
             --radius-sm: 8px;
@@ -71,12 +71,12 @@
             --card-bg: #ffffff;
             --card-hover-bg: #f8fafc;
             --border-color: #e2e8f0;
-            --border-glow: rgba(0, 168, 232, 0.2);
+            --border-glow: rgba(0, 168, 232, 0.25);
             --text-main: #0f172a;
             --text-muted: #64748b;
             --modal-bg: #ffffff;
             --shadow-color: rgba(0, 0, 0, 0.08);
-            --glow-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --glow-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
         }
 
         /* --------------------------------------------------------------------------
@@ -220,8 +220,8 @@
         }
 
         .pulse-logo {
-            width: 70px;
-            height: 70px;
+            width: 75px;
+            height: 75px;
             border-radius: 50%;
             border: 3px solid #00f2fe;
             animation: logoPulse 1.6s infinite ease-in-out;
@@ -248,7 +248,7 @@
         .notice-ticker {
             background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
             color: #ffffff;
-            padding: 7px 14px;
+            padding: 8px 14px;
             font-size: 12px;
             font-weight: 700;
             display: flex;
@@ -386,16 +386,16 @@
         }
 
         /* --------------------------------------------------------------------------
-           2.6 ULTRA-SLIM HERO BANNER CAROUSEL (REDUCED HEIGHT: ~80px)
+           2.6 MODERN HERO BANNER CAROUSEL (OPTIMIZED HEIGHT & FIT)
            -------------------------------------------------------------------------- */
         .banner-carousel {
-            margin-bottom: 14px;
+            margin-bottom: 16px;
             display: flex;
-            gap: 10px;
+            gap: 12px;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             scrollbar-width: none;
-            padding-bottom: 2px;
+            padding: 2px 2px 6px 2px;
         }
 
         .banner-carousel::-webkit-scrollbar {
@@ -403,35 +403,36 @@
         }
 
         .banner-item {
-            flex: 0 0 90%;
+            flex: 0 0 92%;
             scroll-snap-align: center;
-            border-radius: var(--radius-md);
+            border-radius: var(--radius-lg);
             overflow: hidden;
             position: relative;
-            height: 82px; /* Slim Compact Height */
+            height: 120px; /* Perfect height to prevent cropping */
             border: 1px solid var(--border-color);
             cursor: pointer;
-            box-shadow: 0 4px 12px var(--shadow-color);
-            background: var(--card-bg);
-            transition: transform var(--transition-speed) ease, border-color var(--transition-speed) ease;
+            box-shadow: 0 6px 16px var(--shadow-color);
+            background: linear-gradient(135deg, #131326 0%, #0d0d18 100%);
+            transition: transform var(--transition-speed) ease, border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
         }
 
         .banner-item:hover {
             border-color: var(--accent-color);
             transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 242, 254, 0.2);
         }
 
         .banner-item img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain; /* Prevents text and logos from being cropped */
             object-position: center;
-            image-rendering: -webkit-optimize-contrast;
+            background: #080811;
             transition: transform 0.5s ease;
         }
 
         .banner-item:hover img {
-            transform: scale(1.03);
+            transform: scale(1.02);
         }
 
         .banner-item .banner-overlay {
@@ -439,58 +440,58 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(11, 11, 20, 0.85) 100%);
-            padding: 6px 10px;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(11, 11, 20, 0.9) 100%);
+            padding: 8px 12px;
             display: flex;
             align-items: flex-end;
         }
 
         .banner-item h4 {
-            font-size: 12px;
+            font-size: 13px;
             color: #ffffff;
             font-weight: 700;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
         /* --------------------------------------------------------------------------
-           2.7 COMPACT SPONSOR AD CONTAINER (REDUCED HEIGHT: ~80px MAX)
+           2.7 ELEGANT SPONSOR AD CONTAINER
            -------------------------------------------------------------------------- */
         .sponsor-ad-container {
             width: 100%;
-            border-radius: var(--radius-md);
+            border-radius: var(--radius-lg);
             overflow: hidden;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
             display: none;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             text-align: center;
-            padding: 6px;
-            box-shadow: 0 4px 12px var(--shadow-color);
+            padding: 8px 10px;
+            box-shadow: 0 6px 16px var(--shadow-color);
             position: relative;
+            backdrop-filter: blur(8px);
         }
 
         .sponsor-ad-container span.ad-label {
             display: inline-block;
-            font-size: 8px;
+            font-size: 9px;
             font-weight: 800;
-            color: var(--text-muted);
-            margin-bottom: 4px;
+            color: var(--accent-color);
+            margin-bottom: 6px;
             text-transform: uppercase;
             letter-spacing: 0.8px;
-            background: rgba(255,255,255,0.05);
-            padding: 2px 6px;
-            border-radius: 4px;
-            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(0, 242, 254, 0.08);
+            padding: 2px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 242, 254, 0.2);
         }
 
         .sponsor-ad-container img {
-            max-height: 80px; /* Slim compact height for ad banners */
+            max-height: 100px;
             width: 100%;
-            object-fit: cover;
-            object-position: center;
+            object-fit: contain;
             border-radius: var(--radius-sm);
             display: block;
             margin: 0 auto;
@@ -516,7 +517,7 @@
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             color: var(--text-muted);
-            padding: 5px 12px;
+            padding: 6px 14px;
             border-radius: var(--radius-pill);
             font-size: 11px;
             font-weight: 600;
@@ -851,7 +852,7 @@
         }
 
         /* --------------------------------------------------------------------------
-           2.13 MODAL DOWNLOAD WINDOW
+           2.13 MODAL DOWNLOAD WINDOW & STEP NOTIFIER
            -------------------------------------------------------------------------- */
         .modal-overlay {
             position: fixed;
@@ -859,7 +860,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.75);
             z-index: 2000;
             display: none;
             justify-content: center;
@@ -992,6 +993,19 @@
             line-height: 1.5;
         }
 
+        .ad-step-hint {
+            display: none;
+            background: rgba(0, 242, 254, 0.08);
+            border: 1px dashed var(--accent-color);
+            color: var(--accent-color);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 8px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
         .download-btn {
             background: var(--accent-gradient);
             color: #0b0b14;
@@ -1016,12 +1030,9 @@
         }
 
         .download-btn:disabled {
-            opacity: 0.7;
+            opacity: 0.8;
             cursor: not-allowed;
             transform: none;
-            background: var(--border-color);
-            color: var(--text-muted);
-            box-shadow: none;
         }
 
         .suggested-title {
@@ -1201,12 +1212,12 @@
             <input type="text" id="app-search" placeholder="Search for apps, tools, or games...">
         </div>
 
-        <!-- Ultra-Slim Compact Hero Banner Carousel (Height reduced to ~82px) -->
+        <!-- Sleek Banner Carousel (Height & image fit updated) -->
         <div class="banner-carousel" id="banner-carousel" style="display: none;"></div>
 
-        <!-- Compact Sponsor Advertisement Banner Slot (Height reduced to max 80px) -->
+        <!-- Modern Sponsor Advertisement Banner Slot -->
         <div class="sponsor-ad-container" id="global-ad-slot">
-            <span class="ad-label">Advertisement</span>
+            <span class="ad-label"><i class="fas fa-ad"></i> Advertisement</span>
             <div id="ad-content-wrapper"></div>
         </div>
 
@@ -1287,7 +1298,7 @@
     </div>
 
     <!-- ==========================================================================
-         11. APP DETAILS MODAL & DOWNLOAD DIALOG
+         11. APP DETAILS MODAL & SMART DOWNLOAD DIALOG
          ========================================================================== -->
     <div class="modal-overlay" id="app-modal">
         <div class="modal-content">
@@ -1307,6 +1318,11 @@
 
             <div class="modal-desc" id="modal-desc">
                 বিস্তারিত বিবরণ লোড হচ্ছে...
+            </div>
+
+            <!-- Helpful Hint Box for 2-step Ad flow -->
+            <div class="ad-step-hint" id="ad-step-hint">
+                <i class="fas fa-info-circle"></i> অ্যাড পেজ ওপেন হয়েছে! ডাউনলোড ফাইল তৈরি রয়েছে, ব্যাক এসে আবার নিচের বাটনে ক্লিক করুন।
             </div>
 
             <button class="download-btn" id="modal-download-btn" onclick="startDownload()">
@@ -1358,6 +1374,9 @@
         let currentSelectedApp = null;
         let isFirstLoad = true;
         let selectedCategory = 'All';
+
+        /* Download Ad State Tracker */
+        let hasAdOpenedForApp = false;
 
         /* --------------------------------------------------------------------------
            12.3 THEME MANAGEMENT SYSTEM (LIGHT / DARK TOGGLE)
@@ -1561,7 +1580,7 @@
         };
 
         /* --------------------------------------------------------------------------
-           12.9 COMPACT HERO BANNER CAROUSEL LISTENER (~82px SLIM HEIGHT)
+           12.9 COMPACT HERO BANNER CAROUSEL LISTENER (HEIGHT & FIT ENHANCED)
            -------------------------------------------------------------------------- */
         onValue(ref(db, 'banners'), (snap) => {
             const data = snap.val();
@@ -1572,7 +1591,7 @@
                     let b = data[k];
                     html += `
                         <div class="banner-item" onclick="window.open('${b.target_url}', '_blank')">
-                            <img src="${b.image_url}" alt="${b.title || 'Banner'}" onerror="this.src='https://via.placeholder.com/300x82'">
+                            <img src="${b.image_url}" alt="${b.title || 'Banner'}" onerror="this.src='https://via.placeholder.com/350x120'">
                             <div class="banner-overlay">
                                 <h4>${b.title}</h4>
                             </div>
@@ -1704,12 +1723,13 @@
         }
 
         /* --------------------------------------------------------------------------
-           12.12 APP DETAILS MODAL HANDLER
+           12.12 APP DETAILS MODAL HANDLER & TWO-STEP AD FLOW
            -------------------------------------------------------------------------- */
         window.openAppModal = function(appId) {
             const app = allAppsData.find(a => a.id === appId);
             if (!app) return;
             currentSelectedApp = app;
+            hasAdOpenedForApp = false; /* Reset ad state when opening modal */
 
             document.getElementById('modal-img').src = app.image_url;
             document.getElementById('modal-title').innerText = app.title;
@@ -1718,9 +1738,13 @@
             document.getElementById('modal-size').innerHTML = `<i class="fas fa-weight-hanging"></i> ${app.size || 'Unknown'}`;
             document.getElementById('modal-desc').innerHTML = app.description || "এই অ্যাপটির বিস্তারিত বিবরণ দেওয়া নেই। তবে এটি 100% ভাইরাস-মুক্ত ও সুরক্ষিত।";
 
+            document.getElementById('ad-step-hint').style.display = 'none';
+
             const dlBtn = document.getElementById('modal-download-btn');
             dlBtn.innerHTML = '<i class="fas fa-download"></i> Download Now';
             dlBtn.disabled = false;
+            dlBtn.style.background = 'var(--accent-gradient)';
+            dlBtn.style.color = '#0b0b14';
 
             const suggestedGrid = document.getElementById('suggested-apps-grid');
             suggestedGrid.innerHTML = '';
@@ -1751,36 +1775,61 @@
             }
         });
 
-        /* Download Trigger Logic */
+        /* Smart Two-Step Download Logic */
         window.startDownload = function() {
             if (!currentSelectedApp) return;
 
             const btn = document.getElementById('modal-download-btn');
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            const hintBox = document.getElementById('ad-step-hint');
+
+            /* STEP 1: If Ad is enabled & hasn't been opened yet for this attempt */
+            if (adsEnabled && directAdLink !== "" && !hasAdOpenedForApp) {
+                hasAdOpenedForApp = true;
+                window.open(directAdLink, '_blank');
+
+                hintBox.style.display = 'block';
+                btn.innerHTML = '<i class="fas fa-arrow-circle-right"></i> Continue Download (এখানে আবার চাপুন)';
+                btn.style.background = 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)';
+                btn.style.color = '#0b0b14';
+                return;
+            }
+
+            /* STEP 2: Actual File Download with Buffer Countdown */
             btn.disabled = true;
+            let countdown = 3;
+            btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ডাউনলোড শুরু হচ্ছে (${countdown}s)...`;
 
-            /* Increment Download Counter in Database */
-            const downloadRef = ref(db, `latest_updates/${currentSelectedApp.id}/downloads`);
-            runTransaction(downloadRef, (current) => (current || 0) + 1);
+            const timer = setInterval(() => {
+                countdown--;
+                if (countdown > 0) {
+                    btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ডাউনলোড শুরু হচ্ছে (${countdown}s)...`;
+                } else {
+                    clearInterval(timer);
 
-            setTimeout(() => {
-                if (adsEnabled && directAdLink !== "") {
-                    window.open(directAdLink, '_blank');
+                    /* Increment Download Counter in Firebase */
+                    const downloadRef = ref(db, `latest_updates/${currentSelectedApp.id}/downloads`);
+                    runTransaction(downloadRef, (current) => (current || 0) + 1);
+
+                    /* Initiate Real Direct Download Trigger */
+                    const downloadAnchor = document.createElement('a');
+                    downloadAnchor.href = currentSelectedApp.download_url;
+                    downloadAnchor.target = '_blank';
+                    downloadAnchor.rel = 'noopener noreferrer';
+                    document.body.appendChild(downloadAnchor);
+                    downloadAnchor.click();
+                    document.body.removeChild(downloadAnchor);
+
+                    btn.innerHTML = '<i class="fas fa-check-circle"></i> Download Started';
+
+                    /* Optional: Re-trigger Ad window once download starts */
+                    setTimeout(() => {
+                        if (adsEnabled && directAdLink !== "") {
+                            window.open(directAdLink, '_blank');
+                        }
+                        closeAppModal();
+                    }, 1500);
                 }
-
-                const a = document.createElement('a');
-                a.href = currentSelectedApp.download_url;
-                a.download = '';
-                a.target = '_self';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-
-                btn.innerHTML = '<i class="fas fa-check-circle"></i> Download Started';
-                setTimeout(() => {
-                    closeAppModal();
-                }, 1400);
-            }, 900);
+            }, 1000);
         };
 
         /* --------------------------------------------------------------------------
