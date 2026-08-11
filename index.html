@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>JRS Store - Tools, Apps & Articles Platform</title>
     
+    <!-- Meta Data & SEO -->
     <meta name="description" content="JRS Store is the ultimate platform to download modded apps, tools, read useful articles, and find helpful website links curated by Md Jakariya Hasan.">
     <meta name="keywords" content="JRS Store, Mod Apps, Photo Editor, Game, Root Modules, Video Editor, Md Jakariya Hasan, APK Download">
     <meta name="author" content="Md Jakariya Hasan">
     <meta name="robots" content="index, follow">
     
+    <!-- FontAwesome Icons & Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         /* Base Themes & Variables */
@@ -25,6 +28,8 @@
             
             --accent-color: #00f2fe;
             --accent-gradient: linear-gradient(135deg, #00f2fe, #4facfe);
+            --purple-gradient: linear-gradient(135deg, #7F00FF 0%, #E100FF 100%);
+            --orange-gradient: linear-gradient(135deg, #FF512F 0%, #DD2476 100%);
             --shadow-color: rgba(0,0,0,0.3);
         }
 
@@ -43,8 +48,9 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
             -webkit-tap-highlight-color: transparent;
+            word-break: break-word;
         }
 
         body {
@@ -53,8 +59,39 @@
             padding-bottom: 100px;
             transition: background-color 0.3s ease, color 0.3s ease;
             overscroll-behavior-y: contain;
+            min-height: 100vh;
         }
 
+        /* Maintenance Screen Overlay */
+        #maintenance-screen {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #0b0b14;
+            z-index: 99999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 24px;
+        }
+        #maintenance-screen i {
+            font-size: 60px;
+            color: #ffb703;
+            margin-bottom: 16px;
+        }
+        #maintenance-screen h2 {
+            font-size: 22px;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        #maintenance-screen p {
+            color: #8d8dae;
+            font-size: 14px;
+            max-width: 400px;
+        }
+
+        /* Pull to Refresh Indicator */
         #ptr-indicator {
             position: fixed;
             top: 0; left: 0; width: 100%;
@@ -69,6 +106,7 @@
             transition: transform 0.2s cubic-bezier(0.1, 0.6, 0.4, 1);
         }
 
+        /* Global Loader */
         #global-loader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--bg-color); z-index: 9999;
@@ -86,6 +124,7 @@
             100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(0, 242, 254, 0); }
         }
 
+        /* Notice Ticker */
         .notice-ticker {
             background: linear-gradient(135deg, #f39c12, #e67e22);
             color: #ffffff;
@@ -95,6 +134,7 @@
             position: relative; z-index: 1001;
         }
 
+        /* Header & Navigation Bar */
         header {
             background: var(--header-bg); padding: 12px 18px;
             display: flex; justify-content: space-between; align-items: center;
@@ -122,6 +162,7 @@
 
         .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; }
 
+        /* Ads Containers */
         .sponsor-ad-container {
             width: 100%; border-radius: 12px; overflow: hidden;
             margin-bottom: 20px; display: none;
@@ -132,6 +173,7 @@
             display: block; font-size: 10px; color: var(--text-muted); margin-bottom: 5px; text-transform: uppercase;
         }
 
+        /* Search Section */
         .search-container { margin-bottom: 20px; position: relative; }
         .search-container input {
             width: 100%; padding: 12px 15px 12px 40px;
@@ -142,10 +184,41 @@
         .search-container input:focus { border-color: #00f2fe; box-shadow: 0 0 10px rgba(0, 242, 254, 0.2); }
         .search-container i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
 
+        /* Sliders / Hero Banner */
+        .banner-carousel {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+        }
+        .banner-carousel::-webkit-scrollbar { display: none; }
+        .banner-item {
+            flex: 0 0 90%;
+            scroll-snap-align: center;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            height: 150px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+        }
+        .banner-item img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .banner-item .banner-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.85));
+            padding: 12px;
+        }
+        .banner-item h4 { font-size: 14px; color: #fff; font-weight: 700; }
+
         .page-section { display: none; animation: fadeIn 0.4s ease; }
         .page-section.active-section { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* Category Filter Bar */
         .category-filter-bar {
             display: flex; gap: 10px; overflow-x: auto;
             padding-bottom: 10px; margin-bottom: 20px; scrollbar-width: none;
@@ -158,7 +231,7 @@
         }
         .cat-chip.active, .cat-chip:hover {
             background: var(--accent-gradient); color: #0b0b14;
-            border-color: transparent; box-shadow: 0 4px 12px rgba(0,242,254,0.3);
+            border-color: transparent; box-shadow: 0 4px 12px rgba(0,242,254,0.3); font-weight: 800;
         }
 
         .section-title {
@@ -166,6 +239,7 @@
             display: flex; align-items: center; gap: 10px; font-weight: 700;
         }
 
+        /* App Cards & Grid Layout */
         .app-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px; }
         .app-card {
             background: var(--card-bg); border-radius: 16px; padding: 12px;
@@ -183,6 +257,7 @@
         }
         [data-theme="dark"] .download-badge, [data-theme="dark"] .mod-badge { color: #00f2fe; }
 
+        /* Tools & Articles Grid Layout */
         .tools-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
         .tool-card {
             background: var(--card-bg); border: 1px solid var(--border-color); box-shadow: 0 4px 15px var(--shadow-color);
@@ -192,10 +267,11 @@
         .tool-info h3 { font-size: 15px; color: var(--accent-color); margin-bottom: 5px; }
         .tool-info p { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
         .tool-link-btn {
-            background: var(--accent-gradient); color: #fff; padding: 5px 12px;
+            background: var(--accent-gradient); color: #fff; padding: 6px 14px;
             font-size: 11px; font-weight: bold; border-radius: 6px; text-decoration: none; display: inline-block; text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
 
+        /* Dropdown Menu */
         .dropdown-menu {
             position: fixed; top: 75px; right: 15px; background: var(--card-bg);
             width: 240px; border-radius: 16px; box-shadow: 0 15px 30px var(--shadow-color);
@@ -210,11 +286,36 @@
         .dropdown-item:last-child { border-bottom: none; }
         .dropdown-item:hover { background: rgba(0, 242, 254, 0.05); color: var(--accent-color); }
 
+        /* Feedback / Messages Form */
+        .contact-box {
+            margin-top: 30px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+        }
+        .contact-box h4 { font-size: 15px; color: var(--accent-color); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .contact-box input, .contact-box textarea {
+            width: 100%; padding: 10px 14px; background: rgba(0,0,0,0.2);
+            border: 1px solid var(--border-color); border-radius: 10px;
+            color: var(--text-main); font-size: 13px; outline: none; margin-bottom: 10px;
+        }
+        .contact-box textarea { resize: none; }
+        .contact-box button {
+            background: var(--purple-gradient); color: #fff; border: none;
+            padding: 12px; border-radius: 10px; font-weight: 700; font-size: 13px;
+            width: 100%; cursor: pointer; transition: 0.3s;
+        }
+        .contact-box button:hover { opacity: 0.9; }
+
+        /* Developer Credit & Footer */
         .developer-credit {
             text-align: center; margin-top: 40px; padding: 20px;
             font-size: 12px; color: var(--text-muted); border-top: 1px solid var(--border-color);
         }
 
+        /* Bottom Floating Nav */
         .bottom-nav {
             position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%);
             background: var(--header-bg); width: 92%; max-width: 450px; height: 68px;
@@ -236,6 +337,7 @@
 
         .loading-text { text-align: center; color: var(--text-muted); padding: 20px; font-size: 13px; grid-column: 1 / -1; }
 
+        /* Modal Overlay & App Details */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.6); z-index: 2000; display: none;
@@ -295,6 +397,7 @@
         .suggested-card img { width: 45px; height: 45px; border-radius: 10px; margin-bottom: 5px; object-fit: cover; }
         .suggested-card .title { font-size: 11px; color: var(--text-main); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
+        /* Toast Notifications */
         #toast-box {
             position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(100px);
             background: #e74c3c; color: #fff; padding: 12px 25px; border-radius: 25px;
@@ -308,51 +411,71 @@
 </head>
 <body>
 
+    <!-- Maintenance Screen Overlay -->
+    <div id="maintenance-screen">
+        <i class="fas fa-screwdriver-wrench"></i>
+        <h2 id="maint-title">ওয়েবসাইট রক্ষণাবেক্ষণ চলছে</h2>
+        <p id="maint-msg">আমরা সিস্টেম আপডেট করছি। অনুগ্রহ করে কিছুক্ষণ পর চেষ্টা করুন।</p>
+    </div>
+
+    <!-- Pull to Refresh Bar -->
     <div id="ptr-indicator">
         <i class="fas fa-arrow-down"></i> <span>টেনে রিফ্রেশ করুন...</span>
     </div>
 
+    <!-- Page Loading Screen -->
     <div id="global-loader">
         <img src="https://github.com/jakariya41jr/Photos-Row-Link/raw/refs/heads/main/file_00000000798482079f843eb6f797f91d.png" alt="Loading..." class="pulse-logo">
     </div>
 
+    <!-- Toast Notification -->
     <div id="toast-box"><i class="fas fa-wifi-slash"></i> ইন্টারনেট কানেকশন চেক করুন!</div>
 
-    <div class="notice-ticker">
+    <!-- Notice Marquee Ticker -->
+    <div class="notice-ticker" id="notice-wrapper">
         <i class="fas fa-bullhorn"></i>
         <marquee scrollamount="5" id="notice-marquee">স্বাগতম JRS Store এ! নতুন রুট মডিউল ও অ্যাপস পেতে সাথেই থাকুন।</marquee>
     </div>
 
+    <!-- Top Navigation Header -->
     <header>
         <a href="#" class="logo-area">
             <img src="https://github.com/jakariya41jr/Photos-Row-Link/raw/refs/heads/main/file_00000000798482079f843eb6f797f91d.png" alt="JRS Logo">
-            <span>JRS Store</span>
+            <span id="nav-title">JRS Store</span>
         </a>
         <div class="header-actions">
-            <button class="icon-btn" id="theme-toggle-btn"><i class="fas fa-sun"></i></button>
-            <button class="icon-btn" id="menu-btn"><i class="fas fa-bars"></i></button>
+            <button class="icon-btn" id="theme-toggle-btn" title="Toggle Theme"><i class="fas fa-sun"></i></button>
+            <button class="icon-btn" id="menu-btn" title="Menu"><i class="fas fa-bars"></i></button>
         </div>
     </header>
 
+    <!-- Header Dropdown Menu -->
     <div class="dropdown-menu" id="dropdown-menu">
         <a href="#" class="dropdown-item" onclick="switchTab('home-section');"><i class="fas fa-home"></i> Home</a>
         <a href="#" class="dropdown-item" onclick="switchTab('apps-section');"><i class="fas fa-th-large"></i> All Apps</a>
         <a href="#" class="dropdown-item" onclick="switchTab('articles-section');"><i class="fas fa-newspaper"></i> Articles & Blog</a>
-        <a href="#" class="dropdown-item" onclick="switchTab('tools-section');"><i class="fas fa-tools"></i> Tools & Blog</a>
+        <a href="#" class="dropdown-item" onclick="switchTab('tools-section');"><i class="fas fa-tools"></i> Tools & Modules</a>
     </div>
 
+    <!-- Main Content Container -->
     <div class="container">
         
+        <!-- Live Search Container -->
         <div class="search-container">
             <i class="fas fa-search"></i>
             <input type="text" id="app-search" placeholder="Search for apps, tools, or games...">
         </div>
 
+        <!-- Banner Carousel / Hero Sliders -->
+        <div class="banner-carousel" id="banner-carousel" style="display: none;"></div>
+
+        <!-- Sponsor & Custom Script Ads Slot -->
         <div class="sponsor-ad-container" id="global-ad-slot">
             <span class="ad-label">Advertisement</span>
             <div id="ad-content-wrapper"></div>
         </div>
         
+        <!-- HOME PAGE SECTION -->
         <div id="home-section" class="page-section active-section">
             <div class="category-filter-bar" id="category-bar">
                 <div class="cat-chip active" onclick="filterCategory('All', this)">All</div>
@@ -365,27 +488,40 @@
             <div class="app-grid" id="latest-grid"><div class="loading-text">লোড হচ্ছে...</div></div>
         </div>
 
+        <!-- ALL APPS SECTION -->
         <div id="apps-section" class="page-section">
             <div class="section-title"><i class="fas fa-th-large"></i> All Available Apps</div>
             <div class="app-grid" id="all-apps-grid"><div class="loading-text">লোড হচ্ছে...</div></div>
         </div>
 
+        <!-- ARTICLES SECTION -->
         <div id="articles-section" class="page-section">
             <div class="section-title"><i class="fas fa-newspaper"></i> Articles & Blog</div>
             <div id="articles-container" class="tools-grid"><div class="loading-text">লোড হচ্ছে...</div></div>
         </div>
 
+        <!-- TOOLS & MODULES SECTION -->
         <div id="tools-section" class="page-section">
             <div class="section-title"><i class="fas fa-tools"></i> Root Modules & Useful Web Tools</div>
             <div id="tools-container" class="tools-grid"><div class="loading-text">লোড হচ্ছে...</div></div>
         </div>
 
+        <!-- CONTACT & FEEDBACK FORM -->
+        <div class="contact-box">
+            <h4><i class="fas fa-paper-plane"></i> আপনার মতামত বা অ্যাপস রিকোয়েস্ট জানান</h4>
+            <input type="text" id="user-name" placeholder="আপনার নাম (ঐচ্ছিক)">
+            <textarea id="user-msg" rows="3" placeholder="এখানে মেসেজ লিখুন..."></textarea>
+            <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i> মেসেজ পাঠান</button>
+        </div>
+
+        <!-- Footer Credits -->
         <div class="developer-credit">
             Developed by Md Jakariya Hasan<br>
-            &copy; 2026 JRS Store. All Rights Reserved.
+            &copy; 2026 <span id="footer-title">JRS Store</span>. All Rights Reserved.
         </div>
     </div>
 
+    <!-- Bottom Navigation Bar -->
     <div class="bottom-nav">
         <button class="nav-item active" onclick="switchTab('home-section', this)">
             <i class="fas fa-home"></i><span>Home</span>
@@ -397,10 +533,11 @@
             <i class="fas fa-newspaper"></i><span>Articles</span>
         </button>
         <button class="nav-item" onclick="switchTab('tools-section', this)">
-            <i class="fas fa-tools"></i><span>Tools & Blog</span>
+            <i class="fas fa-tools"></i><span>Tools</span>
         </button>
     </div>
 
+    <!-- App Details Modal Window -->
     <div class="modal-overlay" id="app-modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeAppModal()"><i class="fas fa-times"></i></button>
@@ -429,10 +566,12 @@
         </div>
     </div>
 
+    <!-- Firebase Modular JavaScript Implementation -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getDatabase, ref, onValue, update, get } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+        import { getDatabase, ref, onValue, update, push, runTransaction } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
+        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyCTV_PGdsnI2Tcbou3IJUU_r8ylwev9fU0",
             authDomain: "jrs-store.firebaseapp.com",
@@ -450,7 +589,9 @@
         let allAppsData = [];
         let currentSelectedApp = null;
         let isFirstLoad = true;
-        
+        let selectedCategory = 'All';
+
+        // 1. Theme Toggle Management
         const themeBtn = document.getElementById('theme-toggle-btn');
         const themeIcon = themeBtn.querySelector('i');
         
@@ -472,7 +613,7 @@
             applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
         });
 
-        let touchStartY = 0;
+        // 2. Pull-To-Refresh Implementation
         let pStart = { x: 0, y: 0 };
         const ptrIndicator = document.getElementById('ptr-indicator');
         const ptrText = ptrIndicator.querySelector('span');
@@ -526,6 +667,28 @@
             pStart.y = 0;
         });
 
+        // 3. Site Settings & Maintenance Mode Check
+        onValue(ref(db, 'site_settings'), (snap) => {
+            const settings = snap.val() || {};
+            const maintScreen = document.getElementById('maintenance-screen');
+            
+            if (settings.title) {
+                document.getElementById('nav-title').innerText = settings.title;
+                document.getElementById('footer-title').innerText = settings.title;
+                document.title = settings.title;
+            }
+
+            if (settings.maintenance === true) {
+                maintScreen.style.display = 'flex';
+                if(settings.maintenance_msg) {
+                    document.getElementById('maint-msg').innerText = settings.maintenance_msg;
+                }
+            } else {
+                maintScreen.style.display = 'none';
+            }
+        });
+
+        // 4. Ad Settings Management
         let directAdLink = "";
         let adsEnabled = false;
 
@@ -540,17 +703,22 @@
                 directAdLink = data.adsterra_link || "";
                 
                 let adContentHTML = "";
-                if(data.banner_image && data.banner_url) {
-                    adContentHTML += `<a href="${data.banner_url}" target="_blank" style="display:block; margin-bottom:10px;"><img src="${data.banner_image}" style="width:100%; border-radius:8px;" alt="Sponsor"></a>`;
+                const imgUrl = data.banner_image || data.banner_img;
+                const targetUrl = data.banner_url || data.banner_target;
+
+                if(imgUrl) {
+                    adContentHTML += `<a href="${targetUrl || '#'}" target="_blank" rel="noopener" style="display:block; margin-bottom:10px;"><img src="${imgUrl}" style="width:100%; border-radius:8px;" alt="Sponsor"></a>`;
                 }
-                if (data.banner_html) {
-                    adContentHTML += `<div>${data.banner_html}</div>`;
+                
+                const customScript = data.banner_html || data.custom_script;
+                if (customScript) {
+                    adContentHTML += `<div>${customScript}</div>`;
                 }
 
                 if(adContentHTML !== "") {
                     adWrapper.innerHTML = adContentHTML;
                     
-                    // অ্যাড স্ক্রিপ্টগুলো যাতে ব্রাউজার সঠিকভাবে এক্সিকিউট করে তার জন্য এই সেকশন যুক্ত করা হয়েছে:
+                    // Script Execution Trigger
                     Array.from(adWrapper.querySelectorAll('script')).forEach(oldScript => {
                         const newScript = document.createElement('script');
                         Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
@@ -569,6 +737,7 @@
             }
         });
 
+        // 5. Dropdown Navigation Handler
         const menuBtn = document.getElementById('menu-btn');
         const dropdownMenu = document.getElementById('dropdown-menu');
         menuBtn.addEventListener('click', (e) => {
@@ -577,6 +746,7 @@
         });
         window.addEventListener('click', () => dropdownMenu.classList.remove('active'));
 
+        // 6. Tab Switcher
         window.switchTab = function(sectionId, btnElement) {
             document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active-section'));
             document.getElementById(sectionId).classList.add('active-section');
@@ -593,6 +763,30 @@
             window.scrollTo(0, 0);
         }
 
+        // 7. Hero Banners Listener
+        onValue(ref(db, 'banners'), (snap) => {
+            const data = snap.val();
+            const carousel = document.getElementById('banner-carousel');
+            if (data) {
+                let html = '';
+                Object.keys(data).forEach(k => {
+                    let b = data[k];
+                    html += `
+                        <div class="banner-item" onclick="window.open('${b.target_url}', '_blank')">
+                            <img src="${b.image_url}" onerror="this.src='https://via.placeholder.com/300x150'">
+                            <div class="banner-overlay">
+                                <h4>${b.title}</h4>
+                            </div>
+                        </div>`;
+                });
+                carousel.innerHTML = html;
+                carousel.style.display = 'flex';
+            } else {
+                carousel.style.display = 'none';
+            }
+        });
+
+        // 8. Categories Listener
         const catRef = ref(db, 'categories');
         onValue(catRef, (snapshot) => {
             const data = snapshot.val();
@@ -605,6 +799,7 @@
             }
         });
 
+        // 9. Apps Data Listener
         const updatesRef = ref(db, 'latest_updates');
         onValue(updatesRef, (snapshot) => {
             const data = snapshot.val();
@@ -624,11 +819,13 @@
             }
         });
 
+        // Search Input Event
         document.getElementById('app-search').addEventListener('input', function(e) {
             const query = e.target.value.toLowerCase();
             const filteredApps = allAppsData.filter(app => 
                 app.title.toLowerCase().includes(query) || 
-                (app.category && app.category.toLowerCase().includes(query))
+                (app.category && app.category.toLowerCase().includes(query)) ||
+                (app.description && app.description.toLowerCase().includes(query))
             );
             if (document.getElementById('home-section').classList.contains('active-section')) {
                 renderApps(filteredApps);
@@ -636,13 +833,16 @@
             renderAllAppsPage(filteredApps);
         });
 
+        // Category Filter Function
         window.filterCategory = function(category, element) {
+            selectedCategory = category;
             document.querySelectorAll('.cat-chip').forEach(el => el.classList.remove('active'));
             element.classList.add('active');
             let filtered = category === 'All' ? allAppsData : allAppsData.filter(app => app.category === category);
             renderApps(filtered);
         }
 
+        // Render Home Section Apps
         function renderApps(appsArray) {
             const trendingGrid = document.getElementById('trending-grid');
             const latestGrid = document.getElementById('latest-grid');
@@ -659,7 +859,7 @@
                 let downloadsText = item.downloads >= 1000 ? (item.downloads / 1000).toFixed(1) + 'K' : (item.downloads || 0);
                 trendingGrid.innerHTML += `
                     <div class="app-card" onclick="openAppModal('${item.id}')">
-                        <div class="app-icon"><img src="${item.image_url}" alt="${item.title}" loading="lazy"></div>
+                        <div class="app-icon"><img src="${item.image_url}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/60'"></div>
                         <div class="app-title">${item.title}</div>
                         <div class="card-stars"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></div>
                         <div class="download-badge"><i class="fas fa-download"></i> ${downloadsText}</div>
@@ -669,7 +869,7 @@
             [...appsArray].reverse().forEach(item => {
                 latestGrid.innerHTML += `
                     <div class="app-card" onclick="openAppModal('${item.id}')">
-                        <div class="app-icon"><img src="${item.image_url}" alt="${item.title}" loading="lazy"></div>
+                        <div class="app-icon"><img src="${item.image_url}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/60'"></div>
                         <div class="app-title">${item.title}</div>
                         <div class="card-stars"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></div>
                         <div class="mod-badge">${item.version || 'v1.0'}</div>
@@ -677,13 +877,18 @@
             });
         }
 
+        // Render All Apps Section Page
         function renderAllAppsPage(appsArray) {
             const allAppsGrid = document.getElementById('all-apps-grid');
             allAppsGrid.innerHTML = '';
+            if(appsArray.length === 0) {
+                allAppsGrid.innerHTML = '<div class="loading-text">কোনো অ্যাপ পাওয়া যায়নি।</div>';
+                return;
+            }
             appsArray.forEach(item => {
                 allAppsGrid.innerHTML += `
                     <div class="app-card" onclick="openAppModal('${item.id}')">
-                        <div class="app-icon"><img src="${item.image_url}" alt="${item.title}" loading="lazy"></div>
+                        <div class="app-icon"><img src="${item.image_url}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/60'"></div>
                         <div class="app-title">${item.title}</div>
                         <div class="card-stars"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></div>
                         <div class="mod-badge">${item.category || 'App'}</div>
@@ -691,6 +896,7 @@
             });
         }
 
+        // App Modal View
         window.openAppModal = function(appId) {
             const app = allAppsData.find(a => a.id === appId);
             if(!app) return;
@@ -709,13 +915,13 @@
 
             const suggestedGrid = document.getElementById('suggested-apps-grid');
             suggestedGrid.innerHTML = '';
-            const suggestions = allAppsData.filter(a => a.category === app.category && a.id !== app.id).slice(0, 3);
+            const suggestions = allAppsData.filter(a => a.category === app.category && a.id !== app.id).slice(0, 4);
             
             if(suggestions.length > 0) {
                 suggestions.forEach(item => {
                     suggestedGrid.innerHTML += `
                         <div class="suggested-card" onclick="openAppModal('${item.id}')">
-                            <img src="${item.image_url}" alt="${item.title}">
+                            <img src="${item.image_url}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/45'">
                             <div class="title">${item.title}</div>
                         </div>`;
                 });
@@ -733,7 +939,7 @@
             if(e.target === document.getElementById('app-modal')) closeAppModal();
         });
 
-        // Optimized Download Logic: Opens ad and triggers direct background auto-download securely
+        // 10. Download Logic Handler
         window.startDownload = function() {
             if(!currentSelectedApp) return;
             
@@ -741,20 +947,17 @@
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Downloading...';
             btn.disabled = true;
 
-            const appRef = ref(db, 'latest_updates/' + currentSelectedApp.id);
-            get(appRef).then((snapshot) => {
-                if (snapshot.exists()) {
-                    update(appRef, { downloads: (snapshot.val().downloads || 0) + 1 });
-                }
-            });
+            // Increment DB counter
+            const downloadRef = ref(db, `latest_updates/${currentSelectedApp.id}/downloads`);
+            runTransaction(downloadRef, (current) => (current || 0) + 1);
 
             setTimeout(() => {
-                // ১. অ্যাড সক্রিয় থাকলে নতুন ট্যাবে ওপেন হবে
+                // 1. Open Direct Adsterra Link if enabled
                 if (adsEnabled && directAdLink !== "") {
                     window.open(directAdLink, '_blank');
                 }
 
-                // ২. বর্তমান ট্যাবেই ব্যাকগ্রাউন্ডে সরাসরি অটো-ডাউনলোড শুরু হবে (পপ-আপ বাইপাস করার জন্য target = _self ব্যবহার করা হয়েছে)
+                // 2. Direct Auto Download File
                 const a = document.createElement('a');
                 a.href = currentSelectedApp.download_url;
                 a.download = ''; 
@@ -768,6 +971,7 @@
             }, 1000);
         }
 
+        // 11. Tools & Modules Listener
         onValue(ref(db, 'tools_modules'), (snapshot) => {
             const data = snapshot.val();
             const container = document.getElementById('tools-container');
@@ -776,7 +980,7 @@
                 Object.values(data).forEach(item => {
                     container.innerHTML += `
                         <div class="tool-card">
-                            <img src="${item.image_url}" class="tool-img" alt="${item.title}">
+                            <img src="${item.image_url}" class="tool-img" alt="${item.title}" onerror="this.src='https://via.placeholder.com/70'">
                             <div class="tool-info">
                                 <h3>${item.title}</h3>
                                 <p>${item.description}</p>
@@ -787,6 +991,7 @@
             } else container.innerHTML = '<div class="loading-text">কোনো রুট মডিউল বা টুলস নেই।</div>';
         });
 
+        // 12. Articles Listener
         onValue(ref(db, 'site_updates'), (snapshot) => {
             const data = snapshot.val();
             const container = document.getElementById('articles-container');
@@ -805,6 +1010,7 @@
             } else container.innerHTML = '<div class="loading-text">কোনো আর্টিকেল পাওয়া যায়নি।</div>';
         });
 
+        // 13. Notices Listener
         onValue(ref(db, 'notices'), (snapshot) => {
             const data = snapshot.val();
             const marquee = document.getElementById('notice-marquee');
@@ -815,6 +1021,32 @@
             } else marquee.innerHTML = "স্বাগতম JRS Store এ! নতুন রুট মডিউল ও অ্যাপস পেতে সাথেই থাকুন।";
         });
 
+        // 14. Feedback Message Sender Function
+        window.sendMessage = function() {
+            const nameInput = document.getElementById('user-name');
+            const msgInput = document.getElementById('user-msg');
+            const name = nameInput.value.trim();
+            const msg = msgInput.value.trim();
+
+            if (!msg) {
+                alert('মেসেজ খালি রাখা যাবে না!');
+                return;
+            }
+
+            push(ref(db, 'user_messages'), {
+                name: name || 'Anonymous User',
+                message: msg,
+                timestamp: Date.now()
+            }).then(() => {
+                alert('আপনার মেসেজ সফলভাবে পাঠানো হয়েছে!');
+                nameInput.value = '';
+                msgInput.value = '';
+            }).catch(err => {
+                alert('মেসেজ পাঠাতে সমস্যা হয়েছে। আবার চেষ্টা করুন!');
+            });
+        };
+
+        // 15. Offline / Online Toast Notification Trigger
         function showToastMessage(msg, isOnline) {
             const toast = document.getElementById('toast-box');
             toast.innerHTML = isOnline ? `<i class="fas fa-wifi"></i> ${msg}` : `<i class="fas fa-wifi-slash"></i> ${msg}`;
