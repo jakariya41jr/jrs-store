@@ -559,9 +559,9 @@
             const adSlot = document.getElementById('global-ad-slot');
             const adWrapper = document.getElementById('ad-content-wrapper');
             
-            if(data && data.status === true) {
+            if(data && data.master_status === true) {
                 adsEnabled = true;
-                directAdLink = data.direct_link || "";
+                directAdLink = data.adsterra_link || "";
                 
                 if(data.banner_image && data.banner_url) {
                     adWrapper.innerHTML = `<a href="${data.banner_url}" target="_blank"><img src="${data.banner_image}" style="width:100%; border-radius:8px;" alt="Sponsor"></a>`;
